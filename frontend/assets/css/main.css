@@ -1,0 +1,5 @@
+/* Shared styles for every page. Put team-specific styles in their own file. */
+:root {
+  /* Theme colors will be filled in once design.md is final */
+}
+body { font-family: system-ui, sans-serif; }

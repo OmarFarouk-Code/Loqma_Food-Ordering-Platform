@@ -1,0 +1,23 @@
+# Java / Maven
+backend/target/
+*.class
+*.log
+
+# Secrets: never commit
+application-local.properties
+.env
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (if used later)
+node_modules/
