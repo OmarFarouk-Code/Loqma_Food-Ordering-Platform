@@ -34,7 +34,7 @@ public class Customer extends User {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "restaurant_id")
     )
-    private Set<Restaurant> favoriteRestaurants = new ArrayList<>();
+    private List<Restaurant> favoriteRestaurants = new ArrayList<>();
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart;

@@ -1,10 +1,5 @@
 package com.loqma.order.entity;
 
-public class Coupon {
-    
-}
-package com.loqma.order.entity;
-
 import com.loqma.admin.entity.Admin;
 import jakarta.persistence.*;
 import lombok.*;
