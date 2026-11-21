@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order details</title>
+    <link rel="stylesheet" href="../CSS/all.css" />
+    <link rel="stylesheet" href="../CSS/bootstrap.css" />
+    <link rel="stylesheet" href="../CSS/Owner_Main.css" />
+  </head>
+  <body class="bg-light">
+    <nav
+      class="navbar sticky-top bg-white border-bottom px-4 py-0"
+      style="height: 64px"
+    >
+      <ul class="nav align-items-center gap-2 gap-lg-4 w-100">
+        <li class="nav-item">
+          <a class="navbar-brand loqma-brand m-0 d-none d-md-block p-0" href="#"
+            >Loqma</a
+          >
+        </li>
+        <li class="nav-item">
+          <span class="nav-link branch-name text-dark p-0">Branch Name</span>
+        </li>
+        <li class="nav-item">
+          <div
+            id="storeStatusPill"
+            class="status-pill d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill"
+          >
+            <span class="status-dot rounded-circle"></span>
+            <span id="statusText" class="status-label">Open now</span>
+            <div
+              class="form-check form-switch m-0 p-0 d-flex align-items-center"
+            >
+              <input
+                class="form-check-input status-switch d-none d-md-block m-0"
+                type="checkbox"
+                role="switch"
+                id="openStatusToggle"
+                checked
+              />
+            </div>
+          </div>
+        </li>
+        <li class="nav-item ms-auto d-flex align-items-center gap-2">
+          <div class="username d-none d-md-block text-end lh-sm">
+            <div class="fs-6 fw-medium text-dark">Username</div>
+            <small class="text-secondary" style="font-size: 0.75rem"
+              >Owner</small
+            >
+          </div>
+          <a
+            class="d-inline-flex align-items-center text-decoration-none m-0 p-0"
+            href="Owner_Account.html"
+          >
+            <i
+              class="fa-solid fa-circle-user fs-3"
+              style="color: rgb(178, 28, 28)"
+            ></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <aside
+      class="position-fixed start-0 d-none d-md-block bg-white border-end px-3 py-4"
+      style="top: 64px; height: calc(100vh - 64px); width: 92px"
+    >
+      <ul
+        class="nav flex-column d-none d-md-flex h-100 gap-4 align-items-center"
+      >
+        <li class="nav-item">
+          <a
+            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 p-0"
+            aria-current="page"
+            href="#"
+          >
+            <i class="fa-solid fa-receipt fs-5"></i>
+            <span class="small">Orders</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 p-0"
+            href="#"
+          >
+            <i class="fa-solid fa-utensils fs-5"></i>
+            <span class="small">Menu</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 p-0"
+            href="#"
+          >
+            <i class="fa-regular fa-clock fs-5"></i>
+            <span class="small">Hours</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 p-0"
+            href="#"
+          >
+            <i class="fa-solid fa-store fs-5"></i>
+            <span class="small">Account</span>
+          </a>
+        </li>
+        <li class="nav-item mt-auto">
+          <a
+            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 p-0"
+            href="#"
+          >
+            <i class="fa-regular fa-circle-question fs-5"></i>
+            <span class="small">Help</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <nav class="fixed-bottom d-flex d-md-none bg-white border-top py-2 px-2">
+      <ul class="nav nav-pills nav-fill w-100 align-items-center">
+        <li class="nav-item">
+          <a
+            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 py-1 px-0"
+            aria-current="page"
+            href="#"
+          >
+            <i class="fa-solid fa-receipt fs-6"></i>
+            <span style="font-size: 0.75rem">Orders</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 py-1 px-0"
+            href="#"
+          >
+            <i class="fa-solid fa-utensils fs-6"></i>
+            <span style="font-size: 0.75rem">Menu</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 py-1 px-0"
+            href="#"
+          >
+            <i class="fa-regular fa-clock fs-6"></i>
+            <span style="font-size: 0.75rem">Hours</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 py-1 px-0"
+            href="#"
+          >
+            <i class="fa-solid fa-store fs-6"></i>
+            <span style="font-size: 0.75rem">Account</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 py-1 px-0"
+            href="#"
+          >
+            <i class="fa-regular fa-circle-question fs-6"></i>
+            <span style="font-size: 0.75rem">Help</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="p-4" style="margin-left: 92px"></main>
+
+    <script src="../Javascript/owner_Globaljs.js"></script>
+    <script src="../Java Script/bootstrap.bundle.js"></script>
+    <script src="../Javascript/Owner_OrderDetails.js"></script>
+  </body>
+</html>
