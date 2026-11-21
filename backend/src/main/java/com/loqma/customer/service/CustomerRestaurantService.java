@@ -1,7 +1,7 @@
 package com.loqma.customer.service;
 
 import com.loqma.customer.dto.RestaurantSummaryDto;
-import com.loqma.customer.repository.CustomerRestaurantRepository;
+import com.loqma.customer.repository.RestaurantRepository;
 import com.loqma.owner.entity.Restaurant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomerRestaurantService {
 
-    private final CustomerRestaurantRepository restaurantRepository;
+    private final RestaurantRepository restaurantRepository;
 
     public List<RestaurantSummaryDto> listRestaurants() {
         return restaurantRepository.findAll().stream()

@@ -1,0 +1,156 @@
+
+
+:root {
+  --color-page-canvas: #f9f8f8;
+}
+
+.restaurant-list-page {
+  background-color: var(--color-page-canvas);
+}
+
+.list-toolbar {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-md);
+}
+
+.list-tabs {
+  gap: var(--space-lg);
+}
+
+.list-tabs__tab {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-xs);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: var(--color-text-nav);
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s;
+}
+
+.list-tabs__tab:hover {
+  color: var(--color-text);
+}
+
+.list-tabs__tab--active {
+  font-weight: 500;
+  color: var(--color-text);
+  border-bottom-color: var(--color-nav-active);
+}
+
+/* Small number next to "Favourites" */
+.list-tabs__count {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+/* --- Sort dropdown --- */
+.sort-menu__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.sort-menu__label {
+  color: var(--color-text-muted);
+}
+
+.sort-menu__value {
+  font-weight: 700;
+  color: var(--color-charcoal);
+}
+
+.sort-menu__arrow {
+  font-size: 18px;
+  color: var(--color-icon-gray);
+}
+
+.filter-bar {
+  margin-top: var(--space-md);
+  gap: var(--space-md);
+}
+
+/* Chips scroll sideways on small screens instead of wrapping */
+.filter-bar__chips {
+  gap: var(--space-sm);
+  overflow-x: auto;
+  padding: 2px;
+}
+
+.filter-chip {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--space-xs);
+  height: 32px;
+  padding: 0 var(--space-md);
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  color: var(--color-charcoal);
+  background-color: var(--color-white);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.filter-chip:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.filter-chip__icon {
+  font-size: 16px;
+  color: var(--color-icon-gray);
+}
+
+/* Selected chip */
+.filter-chip--active {
+  background-color: var(--color-charcoal);
+  color: var(--color-white);
+}
+
+.filter-chip--active:hover {
+  background-color: var(--color-charcoal);
+}
+
+.filter-chip--active .filter-chip__icon {
+  color: var(--color-white);
+}
+
+/* "Showing 9 open spots" */
+.filter-bar__summary {
+  flex-shrink: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-muted);
+}
+
+
+.list-dropdown-menu {
+  min-width: 14rem;
+  padding: var(--space-xs) 0;
+  font-size: 14px;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.list-dropdown-menu .dropdown-item {
+  padding: var(--space-sm) var(--space-md);
+  color: var(--color-charcoal);
+}
+
+.list-dropdown-menu .dropdown-item:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.list-dropdown-menu .dropdown-item.is-selected {
+  font-weight: 700;
+  background-color: transparent;
+}
