@@ -1,11 +1,11 @@
 package com.loqma.customer.repository;
 
 import com.loqma.owner.entity.Restaurant;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.List;
 
 public interface CustomerRestaurantRepository extends JpaRepository<Restaurant, String> {
 
@@ -23,10 +23,10 @@ public interface CustomerRestaurantRepository extends JpaRepository<Restaurant, 
                           where d.restaurant = r
                             and d.discountPercent > 0
                             and d.isAvailable = true))
-        order by r.averageRating desc
         """)
-    List<Restaurant> findFiltered(@Param("cuisine") String cuisine,
+    Page<Restaurant> findFiltered(@Param("cuisine") String cuisine,
                                   @Param("minRating") Double minRating,
                                   @Param("search") String search,
-                                  @Param("dealsOnly") boolean dealsOnly);
+                                  @Param("dealsOnly") boolean dealsOnly,
+                                  Pageable pageable);
 }
