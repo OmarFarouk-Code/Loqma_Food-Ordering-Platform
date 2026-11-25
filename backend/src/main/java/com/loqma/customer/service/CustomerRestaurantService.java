@@ -18,8 +18,10 @@ public class CustomerRestaurantService {
     private final CustomerRestaurantRepository restaurantRepository;
     private final CustomerMenuItemRepository menuItemRepository;
 
-    public List<RestaurantSummaryDto> listRestaurants() {
-        List<Restaurant> restaurants = restaurantRepository.findAll();
+    public List<RestaurantSummaryDto> listRestaurants(String cuisine, Double minRating,
+                                                      String search, boolean dealsOnly) {
+        List<Restaurant> restaurants = restaurantRepository.findFiltered(
+                blankToNull(cuisine), minRating, blankToNull(search), dealsOnly);
 
         List<String> ids = restaurants.stream().map(Restaurant::getId).toList();
         Set<String> idsWithDeals = ids.isEmpty()
@@ -29,6 +31,11 @@ public class CustomerRestaurantService {
         return restaurants.stream()
                 .map(r -> toSummary(r, idsWithDeals.contains(r.getId())))
                 .toList();
+    }
+
+    // An empty text box from the frontend ("") should count as "no filter"
+    private String blankToNull(String value) {
+        return (value == null || value.isBlank()) ? null : value.trim();
     }
 
     private RestaurantSummaryDto toSummary(Restaurant r, boolean hasDeals) {
