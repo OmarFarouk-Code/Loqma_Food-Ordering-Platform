@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class RestaurantSummaryDto {
+    private Integer deliveryTimeMinutes;
     private String id;
     private String name;
     private String branch;

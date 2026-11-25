@@ -22,8 +22,12 @@ public class CustomerRestaurantController {
             @RequestParam(required = false) Double minRating,
             @RequestParam(required = false) String search,
             @RequestParam(defaultValue = "false") boolean deals,
+            @RequestParam(required = false) Double lat,
+            @RequestParam(required = false) Double lng,
+            @RequestParam(required = false) Integer maxDeliveryTime,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        return service.listRestaurants(cuisine, minRating, search, deals, page, size);
+        return service.listRestaurants(cuisine, minRating, search, deals,
+                lat, lng, maxDeliveryTime, page, size);
     }
 }

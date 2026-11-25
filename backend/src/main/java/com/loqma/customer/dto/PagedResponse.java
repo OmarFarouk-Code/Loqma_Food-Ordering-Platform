@@ -9,7 +9,7 @@ import java.util.List;
 @Builder
 public class PagedResponse<T> {
     private List<T> items;
-    private int page;          // starts at 0
+    private int page;         
     private int size;
     private long totalItems;
     private int totalPages;
