@@ -207,106 +207,22 @@
       <section class="page-container restaurant-section">
         <div class="section-heading d-flex align-items-center justify-content-between">
           <h2 class="section-heading__title">Featured restaurants</h2>
-          <a class="section-heading__link" href="#">View all</a>
+          <a class="section-heading__link" href="restaurant-list.html">View all</a>
         </div>
 
-        <div class="row g-4">
-          <!-- Zahra Grill -->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="restaurant-card">
-              <div class="restaurant-card__image-box">
-                <img
-                  class="restaurant-card__image"
-                  alt="Skewers of oriental mixed grill kofta and shish tawook with charred tomatoes on a bread board."
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAunFCF7PT3eisMhpL12cVTtwefCynG3PlyRvMbQU5JOIV9tReZsxPDaHN4AEAAVbxBMuhixYd1leq7ULI563f9gV-RTRymf0j0ZusY-Spn1UU_52W7pG86oaDdyHbg_qaD3mad4rzYtMbkXiHkGFF9bSjOh38gPSMRabHYqIxeWv9Qioput8DGcI3r6nv9KDy3-J2aZSUeusk5L3lt37Pto__jREgknwKfb89wwkwN"
-                />
-                <button class="favorite-button" type="button" aria-label="Add Zahra Grill to favourites" aria-pressed="false">
-                  <span class="material-symbols-outlined favorite-button__icon">favorite_border</span>
-                </button>
-                <div class="restaurant-card__badge restaurant-card__badge--deal">EGP 30 off</div>
-              </div>
-              <div class="restaurant-card__info">
-                <div class="restaurant-card__name-row">
-                  <h3 class="restaurant-card__name text-truncate">Zahra Grill</h3>
-                  <div class="restaurant-card__rating">
-                    <span class="material-symbols-outlined restaurant-card__star">star</span>
-                    <span class="restaurant-card__rating-value">4.6</span>
-                  </div>
-                </div>
-                <p class="restaurant-card__meta text-truncate">Oriental, New Cairo</p>
-                <p class="restaurant-card__meta">25-35 min EGP 25 delivery</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Kebda Corner (closed) -->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="restaurant-card">
-              <div class="restaurant-card__image-box">
-                <img
-                  class="restaurant-card__image restaurant-card__image--closed"
-                  alt="Sizzling pan of spiced beef liver with green chili peppers and tahina dip."
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU_8VpMZl8Py_VP-FKnQ5so00P9hKXHOLjqxFe5a9lK8eyTEAf8l7OMxN8wqDa52pahoTaxcmy5n9W-7KkY4Ye_V58KKBMUoY3p4teOkkWvEiEVt2oGRMu6nHl9AyH63z9ALDzOa_YXGwm7QUmPtmUZaSFAApZ2Y_ljL6y16saFpb6R4QI-sc2qORvFC8UiYF4RPs1BMJu22f0gcR4chFn5L_t-9yRVXnI8bu0b_XK"
-                />
-                <button class="favorite-button" type="button" aria-label="Add Kebda Corner to favourites" aria-pressed="false">
-                  <span class="material-symbols-outlined favorite-button__icon">favorite_border</span>
-                </button>
-                <div class="restaurant-card__badge restaurant-card__badge--closed">
-                  <span class="material-symbols-outlined icon-14">schedule</span>
-                  <span>Closed · Opens 11:00 AM</span>
-                </div>
-              </div>
-              <div class="restaurant-card__info">
-                <div class="restaurant-card__name-row">
-                  <h3 class="restaurant-card__name text-truncate">Kebda Corner</h3>
-                  <div class="restaurant-card__rating">
-                    <span class="material-symbols-outlined restaurant-card__star">star</span>
-                    <span class="restaurant-card__rating-value">4.2</span>
-                  </div>
-                </div>
-                <p class="restaurant-card__meta text-truncate">Oriental, Heliopolis</p>
-                <p class="restaurant-card__meta">35-45 min EGP 25 delivery</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Populated dynamically by restaurants.js -->
+        <div class="row g-4" id="featured-restaurants-grid"></div>
       </section>
 
       <!-- ---------- Popular near you ---------- -->
       <section class="page-container restaurant-section">
         <div class="section-heading d-flex align-items-center justify-content-between">
           <h2 class="section-heading__title">Popular near you</h2>
-          <a class="section-heading__link" href="#">View all</a>
+          <a class="section-heading__link" href="restaurant-list.html">View all</a>
         </div>
 
-        <div class="row g-4">
-          <!-- Sushi Garden -->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="restaurant-card">
-              <div class="restaurant-card__image-box">
-                <img
-                  class="restaurant-card__image"
-                  alt="Assorted salmon nigiri, tuna maki and dragon rolls on a slate slab with ginger and wasabi."
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUP1KulcVK3xaiTaYsDkO28fFoDFagL5O5n4AvEd9lfcaRwC_RYj7M6Ec9xuLkfbWmgltM0qPPaJWMiqJNZj0TwylKSekz88jqACASsws5m7z444k6_3N7QNp2djFmGk_WV5Gxx6JCVfauxi_jF1vUSIU311r6EJt0aaqgtONjBby5Kxu9E5lJI0LrOhFwRaw4Rk8kCGx6l-_VzpSptuuiXo0n2rhixdZh5jhfYDEn"
-                />
-                <button class="favorite-button" type="button" aria-label="Add Sushi Garden to favourites" aria-pressed="false">
-                  <span class="material-symbols-outlined favorite-button__icon">favorite_border</span>
-                </button>
-              </div>
-              <div class="restaurant-card__info">
-                <div class="restaurant-card__name-row">
-                  <h3 class="restaurant-card__name text-truncate">Sushi Garden</h3>
-                  <div class="restaurant-card__rating">
-                    <span class="material-symbols-outlined restaurant-card__star">star</span>
-                    <span class="restaurant-card__rating-value">4.5</span>
-                  </div>
-                </div>
-                <p class="restaurant-card__meta text-truncate">Asian, Zamalek</p>
-                <p class="restaurant-card__meta">35-45 min EGP 40 delivery</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Populated dynamically by restaurants.js -->
+        <div class="row g-4" id="popular-restaurants-grid"></div>
       </section>
 
       <!-- ---------- Active order banner ----------
@@ -341,6 +257,8 @@
 
     <!-- Scripts -->
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="js/restaurants.js"></script>
     <script src="js/home.js"></script>
   </body>
 </html>

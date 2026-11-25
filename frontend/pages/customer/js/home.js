@@ -2,7 +2,10 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   setupSearchTabs();
-  setupFavoriteButtons();
+  loadRestaurantsIntoPage({
+    containerIds: ["featured-restaurants-grid", "popular-restaurants-grid"],
+    featuredCount: 4,
+  });
 });
 
 
@@ -28,15 +31,7 @@ function setupSearchTabs() {
   });
 }
 
+// Favourite buttons on static (non-API) cards, if any remain
 function setupFavoriteButtons() {
-  const favoriteButtons = document.querySelectorAll(".favorite-button");
-
-  favoriteButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      event.stopPropagation();
-
-      const isFavorite = button.classList.toggle("is-favorite");
-      button.setAttribute("aria-pressed", isFavorite);
-    });
-  });
+  attachFavoriteListeners(document);
 }
