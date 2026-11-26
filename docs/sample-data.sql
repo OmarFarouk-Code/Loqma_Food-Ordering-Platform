@@ -1,4 +1,5 @@
 USE loqma;
+DELETE FROM reviews WHERE id LIKE 'sample-%';
 
 DELETE FROM customer_favorites WHERE customer_id LIKE 'sample-%';
 DELETE FROM menu_items WHERE restaurant_id LIKE 'sample-%';
