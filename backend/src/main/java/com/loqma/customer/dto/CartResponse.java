@@ -2,11 +2,11 @@ package com.loqma.customer.dto;
 
 import java.util.List;
 
-import com.loqma.customer.entity.CartItem;
-
 import lombok.Builder;
+import lombok.Getter;
 
 @Builder 
+@Getter
 public class CartResponse {
-    private List<CartItem> cartItems;
+    private List<CartItemResponse> cartItems;
 }
