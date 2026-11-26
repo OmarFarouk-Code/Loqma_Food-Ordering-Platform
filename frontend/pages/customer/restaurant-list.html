@@ -18,10 +18,10 @@
       <div class="page-container site-header__inner d-flex align-items-center justify-content-between">
         <!-- Logo + main navigation -->
         <div class="site-header__left d-flex align-items-center flex-shrink-0">
-          <a class="brand-logo" href="#">Loqma</a>
+          <a class="brand-logo" href="home.html">Loqma</a>
 
           <nav class="main-nav d-none d-md-flex align-items-center">
-            <a class="main-nav__link main-nav__link--active" aria-current="page" href="#">Home</a>
+            <a class="main-nav__link" href="home.html">Home</a>
             <a class="main-nav__link" href="#">Orders</a>
             <a class="main-nav__link" href="#">Promotions</a>
           </nav>
@@ -147,33 +147,11 @@
           </div>
         </div>
 
-        <div class="row g-4 pt-4">
-          <!-- Sushi Garden -->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="restaurant-card">
-              <div class="restaurant-card__image-box">
-                <img
-                  class="restaurant-card__image"
-                  alt="Assorted salmon nigiri, tuna maki and dragon rolls on a slate slab with ginger and wasabi."
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUP1KulcVK3xaiTaYsDkO28fFoDFagL5O5n4AvEd9lfcaRwC_RYj7M6Ec9xuLkfbWmgltM0qPPaJWMiqJNZj0TwylKSekz88jqACASsws5m7z444k6_3N7QNp2djFmGk_WV5Gxx6JCVfauxi_jF1vUSIU311r6EJt0aaqgtONjBby5Kxu9E5lJI0LrOhFwRaw4Rk8kCGx6l-_VzpSptuuiXo0n2rhixdZh5jhfYDEn"
-                />
-                <button class="favorite-button" type="button" aria-label="Add Sushi Garden to favourites" aria-pressed="false">
-                  <span class="material-symbols-outlined favorite-button__icon">favorite_border</span>
-                </button>
-              </div>
-              <div class="restaurant-card__info">
-                <div class="restaurant-card__name-row">
-                  <h3 class="restaurant-card__name text-truncate">Sushi Garden</h3>
-                  <div class="restaurant-card__rating">
-                    <span class="material-symbols-outlined restaurant-card__star">star</span>
-                    <span class="restaurant-card__rating-value">4.5</span>
-                  </div>
-                </div>
-                <p class="restaurant-card__meta text-truncate">Asian, Zamalek</p>
-                <p class="restaurant-card__meta">35-45 min EGP 40 delivery</p>
-              </div>
-            </div>
-          </div>
+        <!-- Populated dynamically by restaurant-list.js -->
+        <div class="row g-4 pt-4" id="restaurant-list-grid"></div>
+
+        <div class="d-flex justify-content-center pt-4 pb-5 d-none" id="load-more-wrapper">
+          <button class="btn btn-outline-danger px-4" id="load-more-btn" type="button">Load more</button>
         </div>
       </div>
     </main>
@@ -193,7 +171,8 @@
     </footer>
 
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/home.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="js/restaurants.js"></script>
     <script src="js/restaurant-list.js"></script>
   </body>
 </html>

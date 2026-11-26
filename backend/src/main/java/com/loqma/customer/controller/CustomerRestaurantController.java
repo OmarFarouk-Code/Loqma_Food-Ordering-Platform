@@ -5,9 +5,13 @@ import com.loqma.customer.dto.RestaurantSummaryDto;
 import com.loqma.customer.service.CustomerRestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/customer/restaurants")
@@ -29,5 +33,10 @@ public class CustomerRestaurantController {
             @RequestParam(defaultValue = "10") int size) {
         return service.listRestaurants(cuisine, minRating, search, deals,
                 lat, lng, maxDeliveryTime, page, size);
+    }
+
+    @PostMapping("/{id}/favorite")
+    public Map<String, Boolean> toggleFavorite(@PathVariable String id) {
+        return Map.of("isFavorite", service.toggleFavorite(id));
     }
 }
