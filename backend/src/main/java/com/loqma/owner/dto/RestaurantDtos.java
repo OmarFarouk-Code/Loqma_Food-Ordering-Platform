@@ -11,6 +11,8 @@ public final class RestaurantDtos {
 
     /** averageRating and open are NOT here on purpose: the owner can't edit them in this form. */
     public record ProfileRequest(
+            @Size(max = 100) String ownerName,
+            @Size(max = 20) String ownerPhone,
             @NotBlank @Size(max = 100) String name,
             @NotBlank @Size(max = 100) String branch,
             @NotBlank @Size(max = 100) String cuisine,
@@ -24,6 +26,8 @@ public final class RestaurantDtos {
 
     public record ProfileResponse(
             String id,
+            String ownerName,
+            String ownerPhone,
             String name,
             String branch,
             String cuisine,
