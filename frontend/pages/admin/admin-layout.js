@@ -13,6 +13,8 @@ function renderAdminLayout() {
 
   document.getElementById('admin-topbar').innerHTML = `
     <nav class="navbar bg-white border-bottom px-3 gap-3">
+      <button id="menu-toggle" class="btn btn-outline-dark btn-sm d-sm-none" type="button"
+              aria-label="Toggle menu" aria-controls="admin-sidebar" aria-expanded="false">&#9776;</button>
       <span class="fw-bold fs-4 text-danger">Loqma <span class="badge bg-dark fs-6 align-middle">ADMIN</span></span>
       <input class="form-control form-control-sm w-25 d-none d-md-block" placeholder="Search orders, partners...">
       <div class="d-flex align-items-center gap-3">
@@ -35,6 +37,18 @@ function renderAdminLayout() {
         <button id="logout-btn" class="btn btn-link text-dark p-0">Log out</button>
       </div>
     </div>`;
+
+  // Mobile hamburger: the sidebar is hidden on phones until the button is tapped.
+  const sidebar = document.getElementById('admin-sidebar');
+  const toggle = document.getElementById('menu-toggle');
+  function setMenu(open) {
+    sidebar.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.innerHTML = open ? '&#10005;' : '&#9776;';
+  }
+  toggle.addEventListener('click', () => setMenu(!sidebar.classList.contains('open')));
+  sidebar.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
   document.getElementById('logout-btn').addEventListener('click', () => {
     // No auth yet. Replace with real logout when the auth pages exist.

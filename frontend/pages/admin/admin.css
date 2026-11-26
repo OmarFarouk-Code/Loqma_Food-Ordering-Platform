@@ -8,6 +8,8 @@ body { background: #f8f8f8; }
 #admin-content { flex: 1; }
 @media (max-width: 576px) {
   .admin-wrapper { flex-direction: column; }
+  #admin-sidebar { display: none; }
+  #admin-sidebar.open { display: block; }
   #admin-sidebar { width: 100%; border-right: 0; border-bottom: 1px solid #dee2e6; }
   #admin-sidebar > div { min-height: 0; }
 }
