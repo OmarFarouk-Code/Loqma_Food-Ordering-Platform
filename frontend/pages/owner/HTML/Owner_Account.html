@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Owner_Account</title>
+    <title>Owner Account</title>
     <link rel="stylesheet" href="../CSS/all.css" />
     <link rel="stylesheet" href="../CSS/bootstrap.css" />
     <link rel="stylesheet" href="../CSS/Owner_Main.css" />
   </head>
   <body class="bg-light">
     <nav
-      class="navbar sticky-top bg-white border-bottom px-4 py-0"
+      class="navbar sticky-top bg-white border-bottom px-3 px-md-4 py-0"
       style="height: 64px"
     >
       <ul class="nav align-items-center gap-2 gap-lg-4 w-100">
@@ -22,7 +22,7 @@
         <li class="nav-item">
           <span class="nav-link branch-name text-dark p-0">Branch Name</span>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ms-auto ms-md-0">
           <div
             id="storeStatusPill"
             class="status-pill d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill"
@@ -42,7 +42,7 @@
             </div>
           </div>
         </li>
-        <li class="nav-item ms-auto d-flex align-items-center gap-2">
+        <li class="nav-item ms-md-auto d-flex align-items-center gap-2">
           <div class="username d-none d-md-block text-end lh-sm">
             <div class="fs-6 fw-medium text-dark">Username</div>
             <small class="text-secondary" style="font-size: 0.75rem"
@@ -61,6 +61,7 @@
         </li>
       </ul>
     </nav>
+
     <aside
       class="position-fixed start-0 d-none d-md-block bg-white border-end px-3 py-4"
       style="top: 64px; height: calc(100vh - 64px); width: 92px"
@@ -71,7 +72,6 @@
         <li class="nav-item">
           <a
             class="nav-link text-secondary d-flex flex-column align-items-center gap-1 p-0"
-            aria-current="page"
             href="#"
           >
             <i class="fa-solid fa-receipt fs-5"></i>
@@ -90,7 +90,7 @@
         <li class="nav-item">
           <a
             class="nav-link text-secondary d-flex flex-column align-items-center gap-1 p-0"
-            href="#"
+            href="Owner_Working_hours.html"
           >
             <i class="fa-regular fa-clock fs-5"></i>
             <span class="small">Hours</span>
@@ -98,8 +98,9 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 p-0"
-            href="#"
+            class="nav-link text-dark fw-medium d-flex flex-column align-items-center gap-1 p-0"
+            aria-current="page"
+            href="Owner_Account.html"
           >
             <i class="fa-solid fa-store fs-5"></i>
             <span class="small">Account</span>
@@ -122,7 +123,6 @@
         <li class="nav-item">
           <a
             class="nav-link text-secondary d-flex flex-column align-items-center gap-1 py-1 px-0"
-            aria-current="page"
             href="#"
           >
             <i class="fa-solid fa-receipt fs-6"></i>
@@ -149,10 +149,11 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-secondary d-flex flex-column align-items-center gap-1 py-1 px-0"
-            href="#"
+            class="nav-link text-dark fw-medium d-flex flex-column align-items-center gap-1 py-1 px-0"
+            aria-current="page"
+            href="Owner_Account.html"
           >
-            <i class="fa-solid fa-store fs-6"></i>
+            <i class="fa-solid fa-gear fs-6"></i>
             <span style="font-size: 0.75rem">Account</span>
           </a>
         </li>
@@ -168,10 +169,250 @@
       </ul>
     </nav>
 
-    <main class="p-4" style="margin-left: 92px"></main>
+    <main class="ps-md-5 ms-md-5 py-3 py-md-4 px-3 px-md-4 pb-5 mb-5 mb-md-0">
+      <div class="container px-0 px-md-2 py-2" style="max-width: 680px">
+        <div class="mb-4">
+          <h1 class="h3 fw-bold text-dark mb-1">Restaurant settings</h1>
+          <p class="text-secondary small mb-0">
+            Updates to restaurant info go live immediately.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-4 p-3 p-md-4 mb-4 shadow-sm">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 fw-bold text-dark mb-0">Restaurant details</h2>
+            <span
+              class="text-secondary fw-semibold text-uppercase d-md-none"
+              style="font-size: 0.7rem; letter-spacing: 0.5px"
+              >Public info</span
+            >
+          </div>
+
+          <form id="restaurantInfoForm">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label
+                  for="restaurantName"
+                  class="form-label small fw-medium text-dark mb-1"
+                >
+                  Restaurant name
+                </label>
+                <input
+                  type="text"
+                  id="restaurantName"
+                  name="name"
+                  class="form-control rounded-4 px-3 py-3 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
+                  placeholder="Zahra Grill"
+                />
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label
+                  for="branchName"
+                  class="form-label small fw-medium text-dark mb-1"
+                >
+                  Branch
+                </label>
+                <input
+                  type="text"
+                  id="branchName"
+                  name="branch"
+                  class="form-control rounded-4 px-3 py-3 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
+                  placeholder="New Cairo"
+                />
+              </div>
+
+              <div class="col-12">
+                <label
+                  for="primaryCuisine"
+                  class="form-label small fw-medium text-dark mb-1"
+                >
+                  Cuisine
+                </label>
+                <select
+                  id="primaryCuisine"
+                  name="cuisine"
+                  class="form-select rounded-4 px-3 py-3 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
+                >
+                  <option value="Oriental" selected>Oriental</option>
+                  <option value="Egyptian">Egyptian</option>
+                  <option value="Italian">Italian</option>
+                  <option value="Fast Food">Fast Food</option>
+                  <option value="Seafood">Seafood</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label
+                  for="fullAddress"
+                  class="form-label small fw-medium text-dark mb-1"
+                >
+                  Address
+                </label>
+                <input
+                  type="text"
+                  id="fullAddress"
+                  name="address"
+                  class="form-control rounded-4 px-3 py-3 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
+                  placeholder="Street 90, Building 14, Plot 3, New Cairo"
+                />
+              </div>
+
+              <div class="col-12">
+                <label
+                  for="restaurantPhone"
+                  class="form-label small fw-medium text-dark mb-1"
+                >
+                  Business phone
+                </label>
+                <div class="position-relative">
+                  <input
+                    type="tel"
+                    id="restaurantPhone"
+                    name="phone"
+                    class="form-control rounded-4 px-3 py-3 pe-5 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
+                    placeholder="02 2618 0000"
+                  />
+                  <i
+                    class="fa-solid fa-phone position-absolute top-50 end-0 translate-middle-y me-3 text-secondary d-md-none"
+                  ></i>
+                </div>
+              </div>
+
+              <div class="col-12 mt-3">
+                <div
+                  class="d-flex align-items-start align-items-md-center gap-2 rounded-3 px-2 px-md-3 py-2 text-secondary"
+                  style="background-color: #f3f3f3; font-size: 0.8rem"
+                >
+                  <i class="fa-solid fa-circle-info mt-1 mt-md-0"></i>
+                  <span
+                    >Edits go live immediately. No administrative re-approval
+                    needed.</span
+                  >
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="bg-white rounded-4 p-3 p-md-4 mb-4 shadow-sm">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 fw-bold text-dark mb-0">Owner profile</h2>
+            <span
+              class="text-secondary fw-semibold text-uppercase d-md-none"
+              style="font-size: 0.7rem; letter-spacing: 0.5px"
+              >Contact</span
+            >
+          </div>
+
+          <form id="ownerInfoForm">
+            <div class="row g-3">
+              <div class="col-12 col-md-6 order-1">
+                <label
+                  for="ownerName"
+                  class="form-label small fw-medium text-dark mb-1"
+                >
+                  Full name
+                </label>
+                <input
+                  type="text"
+                  id="ownerName"
+                  name="ownerName"
+                  class="form-control rounded-4 px-3 py-3 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
+                  placeholder="Karim Zahra"
+                />
+              </div>
+
+              <div class="col-12 col-md-6 order-3 order-md-2">
+                <label
+                  for="ownerPhone"
+                  class="form-label small fw-medium text-dark mb-1"
+                >
+                  Owner direct phone
+                </label>
+                <div class="position-relative">
+                  <input
+                    type="tel"
+                    id="ownerPhone"
+                    name="ownerPhone"
+                    class="form-control rounded-4 px-3 py-3 pe-5 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
+                    placeholder="0100 111 2222"
+                  />
+                  <i
+                    class="fa-solid fa-mobile-screen position-absolute top-50 end-0 translate-middle-y me-3 text-secondary d-md-none"
+                  ></i>
+                </div>
+              </div>
+
+              <div class="col-12 order-2 order-md-3">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-1"
+                >
+                  <label
+                    for="ownerEmail"
+                    class="form-label small fw-medium text-dark mb-0"
+                  >
+                    Email address
+                  </label>
+                  <span
+                    class="text-secondary d-md-none"
+                    style="font-size: 0.75rem"
+                  >
+                    <i class="fa-solid fa-lock me-1"></i>Managed by account
+                  </span>
+                </div>
+                <div class="position-relative">
+                  <input
+                    type="email"
+                    id="ownerEmail"
+                    name="email"
+                    class="form-control rounded-4 px-3 py-3 pe-5 fs-6 text-secondary border-0 shadow-none"
+                    style="background-color: #f3f3f3"
+                    placeholder="karim.zahra@example.com"
+                    readonly
+                  />
+                  <i
+                    class="fa-solid fa-lock position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"
+                  ></i>
+                </div>
+                <div
+                  class="text-secondary mt-1 d-none d-md-block"
+                  style="font-size: 0.75rem"
+                >
+                  Email cannot be changed directly
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div
+          class="d-flex flex-column-reverse flex-md-row justify-content-md-between align-items-stretch align-items-md-center gap-2 pt-1 pb-4"
+        >
+          <button
+            type="button"
+            id="logoutBtn"
+            class="btn rounded-pill px-4 py-3 py-md-2 fw-medium text-dark border-0 d-flex align-items-center justify-content-center gap-2"
+            style="background-color: #eeeeee"
+          >
+            <i class="fa-solid fa-arrow-right-from-bracket d-md-none"></i>
+            <span>Log out</span>
+          </button>
+          <button
+            type="button"
+            id="saveChangesBtn"
+            class="btn rounded-pill px-4 py-3 py-md-2 fw-medium text-white border-0 d-flex align-items-center justify-content-center gap-2"
+            style="background-color: #d91400"
+          >
+            <i class="fa-regular fa-floppy-disk d-md-none"></i>
+            <span>Save changes</span>
+          </button>
+        </div>
+      </div>
+    </main>
 
     <script src="../Javascript/owner_Globaljs.js"></script>
-    <script src="../Java Script/bootstrap.bundle.js"></script>
+    <script src="../Javascript/bootstrap.bundle.js"></script>
     <script src="../Javascript/Owner_Account.js"></script>
   </body>
 </html>
