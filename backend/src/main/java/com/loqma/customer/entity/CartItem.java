@@ -1,5 +1,6 @@
 package com.loqma.customer.entity;
 
+import com.loqma.customer.dto.ExtraDto;
 import com.loqma.owner.entity.ItemExtra;
 import com.loqma.owner.entity.ItemSize;
 import com.loqma.owner.entity.MenuItem;
