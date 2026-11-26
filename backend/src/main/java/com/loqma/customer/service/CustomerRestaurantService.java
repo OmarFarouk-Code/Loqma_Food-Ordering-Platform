@@ -2,6 +2,7 @@ package com.loqma.customer.service;
 
 import com.loqma.customer.dto.PagedResponse;
 import com.loqma.customer.dto.RestaurantSummaryDto;
+import com.loqma.customer.entity.Customer;
 import com.loqma.customer.repository.CustomerFavoriteRepository;
 import com.loqma.customer.repository.CustomerMenuItemRepository;
 import com.loqma.customer.repository.CustomerRestaurantRepository;
@@ -10,7 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -71,6 +75,25 @@ public class CustomerRestaurantService {
 
         return buildResponse(withinTime.subList(from, to), lat, lng, safePage, safeSize,
                 withinTime.size(), totalPages, to < withinTime.size());
+    }
+
+    @Transactional
+    public boolean toggleFavorite(String restaurantId) {
+        String customerId = currentCustomer.getCurrentCustomerId();
+        Customer customer = favoriteRepository.findWithFavoritesById(customerId)
+                .orElseThrow(() -> new ResponseStatusException(
+                      HttpStatus.NOT_FOUND, "Customer not found: " + customerId));
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Restaurant not found: " + restaurantId));
+
+        List<Restaurant> favorites = customer.getFavoriteRestaurants();
+        boolean removed = favorites.removeIf(r -> r.getId().equals(restaurantId));
+        if (!removed) {
+            favorites.add(restaurant);
+        }
+        favoriteRepository.save(customer);
+        return !removed;
     }
 
     private PagedResponse<RestaurantSummaryDto> buildResponse(List<Restaurant> restaurants,
