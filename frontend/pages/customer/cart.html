@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your cart – Loqma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Loqma styles -->
+  <link href="css/cart.css" rel="stylesheet" />
+</head>
+<body>
+ 
+  <!-- ===== Desktop top navigation (hidden on mobile) ===== -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a href="/" class="logo">Loqma</a>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/orders">Orders</a>
+        <a href="/promotions">Promotions</a>
+      </nav>
+      <form class="search" role="search" onsubmit="return false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+        <input type="search" id="search-input" placeholder="Search" aria-label="Search">
+      </form>
+      <a href="/cart" class="icon-btn" aria-label="Cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="badge" id="cart-badge">2</span>
+      </a>
+      <a href="/notifications" class="icon-btn" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15L6 17z"/><path d="M10 21h4"/></svg>
+        <span class="badge" id="notification-badge">3</span>
+      </a>
+      <button class="user" type="button">
+        <span class="user__avatar" id="user-avatar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="3.2"/><path d="M6 19c.6-3 3-4.5 6-4.5s5.4 1.5 6 4.5"/></svg>
+        </span>
+        <span class="user__name" id="user-name">USER_NAME</span>
+        <svg class="user__caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+      </button>
+    </div>
+  </header>
+ 
+  <!-- ===== Mobile header (hidden on desktop) ===== -->
+  <header class="mobilebar">
+    <a href="javascript:history.back()" class="back-btn back-btn--plain" id="mobile-back-link" aria-label="Back">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+    </a>
+    <span class="mobilebar__title">Your cart</span>
+  </header>
+ 
+  <main class="cart">
+ 
+    <!-- Desktop page title -->
+    <div class="page-title">
+      <a href="javascript:history.back()" class="back-btn" id="back-link" aria-label="Back">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </a>
+      <h1>Your cart</h1>
+    </div>
+ 
+    <!-- Restaurant -->
+    <section class="restaurant">
+      <span class="restaurant__logo" id="restaurant-logo">Z</span>
+      <div class="restaurant__info">
+        <h2 id="restaurant-name">RESTAURANT_NAME</h2>
+        <p>
+          Delivery in <span id="delivery-time">DELIVERY_DURATION</span><span class="desk-only"> · <span id="delivery-address">DELIVERY_ADDRESS</span></span>
+        </p>
+      </div>
+      <a href="/restaurant" class="chip" id="add-items-link">
+        <span class="desk-only">+ Add more items</span>
+        <span class="mob-only">+ Add items</span>
+      </a>
+    </section>
+ 
+    <!-- Cart items (repeat <article class="item"> per item; ids shown with index 1, 2, …) -->
+    <section class="items" id="cart-items" aria-label="Cart items">
+ 
+      <article class="item" id="item-1" data-item-id="">
+        <span class="item__img"><img id="item-1-image" alt="" hidden></span>
+        <div class="item__body">
+          <h3 class="item__name" id="item-1-name">ITEM_NAME</h3>
+          <p class="item__options" id="item-1-options">ITEM_OPTIONS</p>
+          <p class="item__note" id="item-1-note">“ITEM_NOTE”</p>
+          <div class="qty">
+            <button type="button" id="item-1-decrease" aria-label="Decrease quantity">−</button>
+            <span id="item-1-quantity">1</span>
+            <button type="button" id="item-1-increase" aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+        <button type="button" class="item__remove" id="item-1-remove" aria-label="Remove item">×</button>
+        <span class="item__price" id="item-1-price">EGP 95.00</span>
+      </article>
+ 
+    </section>
+ 
+    <!-- Minimum order progress -->
+    <section class="minorder" id="min-order-box">
+      <div class="minorder__row">
+        <span class="minorder__status" id="min-order-status">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>
+          <span id="min-order-text">Minimum order reached (EGP 100)</span>
+        </span>
+        <span class="minorder__count">
+          <span class="desk-only">Subtotal EGP </span><span id="min-order-subtotal">190</span> / <span class="desk-only">min EGP </span><span id="min-order-min">100</span>
+        </span>
+      </div>
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" id="min-order-progress">
+        <span id="min-order-progress-bar" style="width:100%"></span>
+      </div>
+    </section>
+ 
+    <!-- Order summary -->
+    <section class="summary">
+      <h2 class="summary__title">Order summary</h2>
+      <dl>
+        <div class="row"><dt>Subtotal (<span id="items-count">2</span> items)</dt><dd id="subtotal">EGP 190.00</dd></div>
+        <div class="row"><dt>Delivery fee</dt><dd id="delivery-fee">EGP 25.00</dd></div>
+        <div class="row"><dt>Service fee <button type="button" class="info" id="service-fee-info" aria-label="About service fee">i</button></dt><dd id="service-fee">EGP 9.50</dd></div>
+        <div class="row"><dt>Tax <button type="button" class="info" id="tax-info" aria-label="About tax">i</button></dt><dd id="tax">EGP 26.60</dd></div>
+        <div class="row row--total"><dt>Total</dt><dd id="total">EGP 251.10</dd></div>
+      </dl>
+    </section>
+ 
+    <!-- Loyalty points -->
+    <p class="points" id="points-box">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3l1.6 4.4L16 9l-4.4 1.6L10 15l-1.6-4.4L4 9l4.4-1.6L10 3zM18 14l.9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9L18 14z"/></svg>
+      <span>You’ll earn <strong id="points-earned">19</strong> points with this order</span>
+    </p>
+ 
+    <!-- Checkout bar (inline on desktop, fixed to bottom on mobile) -->
+    <div class="checkout">
+      <div class="checkout__total">
+        <small><span class="desk-only">Total amount</span><span class="mob-only">Total to pay</span></small>
+        <strong id="checkout-total">EGP 251.10</strong>
+      </div>
+      <a href="/checkout" class="btn" id="checkout-btn">Go to checkout</a>
+    </div>
+ 
+  </main>
+ 
+  <footer class="footer">
+    <a href="/help">Help</a>
+    <a href="/about">About Loqma</a>
+    <a href="/terms">Terms</a>
+    <a href="/privacy">Privacy</a>
+    <span>© <span id="footer-year">2026</span> Loqma</span>
+  </footer>
+
+  <script src="../../assets/js/config.js"></script>
+  <script src="../../assets/js/api.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>
