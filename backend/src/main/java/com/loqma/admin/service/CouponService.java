@@ -1,8 +1,7 @@
 package com.loqma.admin.service;
-package com.loqma.admin.service;
 
-import com.loqma.admin.entity.Coupon;
-import com.loqma.coupon.CouponRepository;
+import com.loqma.order.entity.Coupon;
+import com.loqma.coupon.AdminCouponRepository;
 import com.loqma.coupon.CouponRequest;
 import com.loqma.coupon.CouponResponse;
 import com.loqma.coupon.exception.*;

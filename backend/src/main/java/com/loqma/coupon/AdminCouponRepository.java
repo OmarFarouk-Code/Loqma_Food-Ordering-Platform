@@ -1,6 +1,6 @@
 package com.loqma.coupon;
 
-import com.loqma.admin.entity.Coupon;
+import com.loqma.order.entity.Coupon;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
