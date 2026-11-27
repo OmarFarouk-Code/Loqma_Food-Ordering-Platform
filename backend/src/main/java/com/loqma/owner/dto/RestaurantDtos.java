@@ -22,6 +22,8 @@ public final class RestaurantDtos {
             @Size(max = 20) String phone,
             @NotNull @PositiveOrZero Double deliveryFee,
             @NotNull @PositiveOrZero Double minimumOrderAmount,
+            @NotNull @PositiveOrZero Double prepTime,
+            @NotNull @PositiveOrZero Double maxDeliveryDistance,
             @Size(max = 100) String gpsLocation) {}
 
     public record ProfileResponse(
@@ -37,6 +39,8 @@ public final class RestaurantDtos {
             String phone,
             Double deliveryFee,
             Double minimumOrderAmount,
+            Double prepTime,
+            Double maxDeliveryDistance,
             Double averageRating,
             boolean open,
             String gpsLocation) {}

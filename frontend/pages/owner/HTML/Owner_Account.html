@@ -141,7 +141,7 @@
         <li class="nav-item">
           <a
             class="nav-link text-secondary d-flex flex-column align-items-center gap-1 py-1 px-0"
-            href="#"
+            href="Owner_Working_hours.html"
           >
             <i class="fa-regular fa-clock fs-6"></i>
             <span style="font-size: 0.75rem">Hours</span>
@@ -153,7 +153,7 @@
             aria-current="page"
             href="Owner_Account.html"
           >
-            <i class="fa-solid fa-gear fs-6"></i>
+            <i class="fa-solid fa-store fs-6"></i>
             <span style="font-size: 0.75rem">Account</span>
           </a>
         </li>
@@ -234,11 +234,20 @@
                   name="cuisine"
                   class="form-select rounded-4 px-3 py-3 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
                 >
-                  <option value="Oriental" selected>Oriental</option>
                   <option value="Egyptian">Egyptian</option>
-                  <option value="Italian">Italian</option>
-                  <option value="Fast Food">Fast Food</option>
+                  <option value="Fast food">Fast food</option>
+                  <option value="Burgers">Burgers</option>
+                  <option value="Pizza">Pizza</option>
+                  <option value="Grills">Grills</option>
                   <option value="Seafood">Seafood</option>
+                  <option value="Chicken">Chicken</option>
+                  <option value="Sandwiches">Sandwiches</option>
+                  <option value="Italian">Italian</option>
+                  <option value="Asian">Asian</option>
+                  <option value="Healthy">Healthy</option>
+                  <option value="Breakfast">Breakfast</option>
+                  <option value="Desserts">Desserts</option>
+                  <option value="Coffee & drinks">Coffee & drinks</option>
                 </select>
               </div>
 
@@ -294,7 +303,91 @@
             </div>
           </form>
         </div>
+        <div class="bg-white rounded-4 p-3 p-md-4 mb-4 shadow-sm">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 fw-bold text-dark mb-0">Delivery settings</h2>
+            <span
+              class="text-secondary fw-semibold text-uppercase d-md-none"
+              style="font-size: 0.7rem; letter-spacing: 0.5px"
+              >Logistics</span
+            >
+          </div>
 
+          <form id="deliverySettingsForm">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label
+                  for="deliveryFee"
+                  class="form-label small fw-medium text-dark mb-1"
+                >
+                  Delivery fee (EGP)
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  step="any"
+                  id="deliveryFee"
+                  name="deliveryFee"
+                  class="form-control rounded-4 px-3 py-3 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
+                  placeholder="0"
+                />
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label
+                  for="minimumOrderAmount"
+                  class="form-label small fw-medium text-dark mb-1"
+                >
+                  Minimum order (EGP)
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  step="any"
+                  id="minimumOrderAmount"
+                  name="minimumOrderAmount"
+                  class="form-control rounded-4 px-3 py-3 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
+                  placeholder="0"
+                />
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label
+                  for="preparationTime"
+                  class="form-label small fw-medium text-dark mb-1"
+                >
+                  Preparation time (min)
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  id="preparationTime"
+                  name="preparationTime"
+                  class="form-control rounded-4 px-3 py-3 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
+                  placeholder="25"
+                />
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label
+                  for="maxDeliveryDistance"
+                  class="form-label small fw-medium text-dark mb-1"
+                >
+                  Max delivery distance (km)
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  step="any"
+                  id="maxDeliveryDistance"
+                  name="maxDeliveryDistance"
+                  class="form-control rounded-4 px-3 py-3 fs-6 text-dark shadow-none bg-light bg-md-white border-0 border-md"
+                  placeholder="15"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
         <div class="bg-white rounded-4 p-3 p-md-4 mb-4 shadow-sm">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="h5 fw-bold text-dark mb-0">Owner profile</h2>
