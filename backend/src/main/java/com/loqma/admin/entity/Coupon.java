@@ -1,4 +1,4 @@
-package com.loqma.coupon;
+package com.loqma.admin.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;

@@ -1,5 +1,9 @@
-package com.loqma.coupon;
+package com.loqma.admin.service;
 
+import com.loqma.admin.entity.Coupon;
+import com.loqma.coupon.CouponRepository;
+import com.loqma.coupon.CouponRequest;
+import com.loqma.coupon.CouponResponse;
 import com.loqma.coupon.exception.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
