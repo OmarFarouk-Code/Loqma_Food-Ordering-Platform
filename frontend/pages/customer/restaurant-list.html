@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Loqma Restaurant List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/home.css" rel="stylesheet" />
+    <link href="css/restaurant-list.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="page-container site-header__inner d-flex align-items-center justify-content-between">
+        <!-- Logo + main navigation -->
+        <div class="site-header__left d-flex align-items-center flex-shrink-0">
+          <a class="brand-logo" href="home.html">Loqma</a>
+
+          <nav class="main-nav d-none d-md-flex align-items-center">
+            <a class="main-nav__link" href="home.html">Home</a>
+            <a class="main-nav__link" href="#">Orders</a>
+            <a class="main-nav__link" href="#">Promotions</a>
+          </nav>
+        </div>
+
+        <!-- Search -->
+        <div class="header-search d-none d-md-flex align-items-center">
+          <div class="header-search__box d-flex align-items-center">
+            <span class="material-symbols-outlined header-search__icon">search</span>
+            <input class="header-search__input" type="text" placeholder="Search restaurants or dishes" />
+          </div>
+        </div>
+
+        <!-- Notifications, cart and user menu -->
+        <div class="header-actions d-flex align-items-center flex-shrink-0">
+          <button class="icon-button" type="button" aria-label="Notifications">
+            <span class="material-symbols-outlined icon-24">notifications</span>
+            <span class="icon-button__badge">3</span>
+          </button>
+
+          <button class="icon-button" type="button" aria-label="Shopping Cart">
+            <span class="material-symbols-outlined icon-24">shopping_bag</span>
+            <span class="icon-button__badge">2</span>
+          </button>
+
+          <div class="user-menu d-flex align-items-center">
+            <div class="user-menu__avatar">
+              <span class="material-symbols-outlined icon-18">person</span>
+            </div>
+            <span class="user-menu__name d-none d-lg-inline-block">Omar Aly</span>
+            <span class="material-symbols-outlined user-menu__arrow">expand_more</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content restaurant-list-page">
+      <div class="page-container">
+        <div class="search-header d-flex flex-column align-items-center justify-content-center">
+          <div class="search-tabs d-flex align-items-center">
+            <button class="search-tabs__tab search-tabs__tab--active" id="tab-restaurants" type="button">Restaurants</button>
+            <button class="search-tabs__tab" id="tab-dishes" type="button">Dishes</button>
+          </div>
+
+          <div class="hero-search">
+            <div class="hero-search__box d-flex align-items-center">
+              <span class="material-symbols-outlined hero-search__icon">search</span>
+              <input class="hero-search__input" id="main-search-input" type="text" placeholder="Search restaurants" />
+              <button class="hero-search__submit" type="button" aria-label="Submit search">
+                <span class="material-symbols-outlined icon-20">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between pt-5">
+          <div class="list-tabs d-flex align-items-center" role="tablist">
+            <button class="list-tabs__tab list-tabs__tab--active" id="tab-all" data-tab="all" type="button" role="tab" aria-selected="true">
+              All restaurants
+            </button>
+            <button class="list-tabs__tab" id="tab-favourites" data-tab="favourites" type="button" role="tab" aria-selected="false">
+              Favourites
+            </button>
+          </div>
+
+          <div class="dropdown">
+            <button class="sort-menu__toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="sort-menu__label">Sort:</span>
+              <span class="sort-menu__value" id="sort-value">Rating (high to low)</span>
+              <span class="material-symbols-outlined sort-menu__arrow">expand_more</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end list-dropdown-menu" id="sort-options">
+              <li><button class="dropdown-item is-selected" type="button" data-sort="rating_desc">Rating (high to low)</button></li>
+              <li><button class="dropdown-item" type="button" data-sort="time_asc">Delivery time (fastest)</button></li>
+              <li><button class="dropdown-item" type="button" data-sort="distance_asc">Closest to me</button></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="filter-bar d-flex align-items-center justify-content-between pt-3">
+          <div class="filter-bar__chips d-flex align-items-center">
+            <!-- Cuisine dropdown chip -->
+            <div class="dropdown">
+              <button
+                class="filter-chip"
+                id="cuisine-chip"
+                type="button"
+                data-bs-popper-config='{"strategy":"fixed"}'
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span id="cuisine-chip-label">Cuisine</span>
+                <span class="material-symbols-outlined filter-chip__icon">expand_more</span>
+              </button>
+              <ul class="dropdown-menu list-dropdown-menu" id="cuisine-options">
+                <li><button class="dropdown-item is-selected" type="button" data-cuisine="">All cuisines</button></li>
+                <li><button class="dropdown-item" type="button" data-cuisine="Burgers">Burgers</button></li>
+                <li><button class="dropdown-item" type="button" data-cuisine="Pizza">Pizza</button></li>
+                <li><button class="dropdown-item" type="button" data-cuisine="Chicken">Chicken</button></li>
+                <li><button class="dropdown-item" type="button" data-cuisine="Seafood">Seafood</button></li>
+                <li><button class="dropdown-item" type="button" data-cuisine="Asian">Asian</button></li>
+                <li><button class="dropdown-item" type="button" data-cuisine="Italian">Italian</button></li>
+                <li><button class="dropdown-item" type="button" data-cuisine="Oriental">Oriental</button></li>
+                <li><button class="dropdown-item" type="button" data-cuisine="Desserts">Desserts</button></li>
+                <li><button class="dropdown-item" type="button" data-cuisine="Healthy">Healthy</button></li>
+                <li><button class="dropdown-item" type="button" data-cuisine="Drinks">Drinks</button></li>
+              </ul>
+            </div>
+
+            <!-- Rating chips (only one can be active) -->
+            <button class="filter-chip" type="button" data-filter="minRating" data-value="4.0" aria-pressed="false">Rating 4.0+</button>
+            <button class="filter-chip" type="button" data-filter="minRating" data-value="4.5" aria-pressed="false">Rating 4.5+</button>
+
+            <!-- Delivery time chips (only one can be active) -->
+            <button class="filter-chip" type="button" data-filter="maxTime" data-value="30" aria-pressed="false">Under 30 min</button>
+            <button class="filter-chip" type="button" data-filter="maxTime" data-value="45" aria-pressed="false">Under 45 min</button>
+
+            <!-- Deals chip (on / off) -->
+            <button class="filter-chip" type="button" data-filter="deals" data-value="true" aria-pressed="false">
+              <span class="material-symbols-outlined filter-chip__icon">sell</span>
+              Deals
+            </button>
+          </div>
+        </div>
+
+        <!-- Populated dynamically by restaurant-list.js -->
+        <div class="row g-4 pt-4" id="restaurant-list-grid"></div>
+
+        <div class="d-flex justify-content-center pt-4 pb-5 d-none" id="load-more-wrapper">
+          <button class="btn btn-outline-danger px-4" id="load-more-btn" type="button">Load more</button>
+        </div>
+      </div>
+    </main>
+    <!--SITE FOOTER -->
+    <footer class="site-footer">
+      <div class="page-container site-footer__inner d-flex flex-wrap align-items-center justify-content-center">
+        <a class="site-footer__link" href="#">Help</a>
+        <span>•</span>
+        <a class="site-footer__link" href="#">About Loqma</a>
+        <span>•</span>
+        <a class="site-footer__link" href="#">Terms</a>
+        <span>•</span>
+        <a class="site-footer__link" href="#">Privacy</a>
+        <span>•</span>
+        <span>© 2026 Loqma</span>
+      </div>
+    </footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="js/restaurants.js"></script>
+    <script src="js/restaurant-list.js"></script>
+  </body>
+</html>
