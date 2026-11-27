@@ -9,13 +9,13 @@ DELETE FROM customers WHERE user_id LIKE 'sample-%';
 DELETE FROM users WHERE id LIKE 'sample-%';
 
 INSERT INTO users (id, name, email, phone, password, role, status, reapplication_attempts) VALUES
-('sample-owner-1', 'Owner One',   'owner1@sample.test', '01000000001', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
-('sample-owner-2', 'Owner Two',   'owner2@sample.test', '01000000002', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
-('sample-owner-3', 'Owner Three', 'owner3@sample.test', '01000000003', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
-('sample-owner-4', 'Owner Four',  'owner4@sample.test', '01000000004', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
-('sample-owner-5', 'Owner Five',  'owner5@sample.test', '01000000005', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
-('sample-owner-6', 'Owner Six',   'owner6@sample.test', '01000000006', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
-('sample-customer-1', 'Test Customer', 'customer1@sample.test', '01000000011', 'sample-not-a-real-hash', 'CUSTOMER', 'ACTIVE', 0);
+('sample-owner-1', 'Owner One',   'owner1@sample.test', '01990000001', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
+('sample-owner-2', 'Owner Two',   'owner2@sample.test', '01990000002', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
+('sample-owner-3', 'Owner Three', 'owner3@sample.test', '01990000003', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
+('sample-owner-4', 'Owner Four',  'owner4@sample.test', '01990000004', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
+('sample-owner-5', 'Owner Five',  'owner5@sample.test', '01990000005', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
+('sample-owner-6', 'Owner Six',   'owner6@sample.test', '01990000006', 'sample-not-a-real-hash', 'RESTAURANT_OWNER', 'ACTIVE', 0),
+('sample-customer-1', 'Test Customer', 'customer1@sample.test', '01990000011', 'sample-not-a-real-hash', 'CUSTOMER', 'ACTIVE', 0);
 
 INSERT INTO restaurant_owners (user_id, restaurant_name, branch) VALUES
 ('sample-owner-1', 'Burger King', 'Maadi'),
