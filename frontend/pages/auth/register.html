@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create your account | Loqma</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
+      rel="stylesheet"
+    />
+    <link href="../../assets/css/main.css" rel="stylesheet" />
+    <link href="css/auth.css" rel="stylesheet" />
+    <link href="css/register.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <!-- Change the href to your real home page -->
+        <a
+          href="../../index.html"
+          class="topbar-back"
+          aria-label="Back to Home"
+        >
+          <i class="bi bi-arrow-left"></i
+          ><span class="d-none d-md-inline">Back to Home</span>
+        </a>
+        <a href="../../index.html" class="topbar-logo">Loqma</a>
+        <nav class="topbar-right">
+          <a href="login.html" class="topbar-link d-none d-md-inline">Log in</a>
+          <a href="register.html" class="topbar-link active d-none d-md-inline"
+            >Register</a
+          >
+          <a href="login.html" class="avatar" aria-label="Account"
+            ><i class="bi bi-person-fill"></i
+          ></a>
+        </nav>
+      </header>
+
+      <main class="auth-main">
+        <div class="auth-wrap reg-wrap">
+          <div class="brand-row d-md-none">
+            <span class="brand-red">Loqma</span>
+          </div>
+
+          <h1 class="auth-title">Create your account</h1>
+          <p class="auth-sub">
+            Choose your role to get started with fast delivery.
+          </p>
+
+          <div id="notice" class="notice d-none" role="alert"></div>
+
+          <form id="registerForm" novalidate>
+            <!-- Role -->
+            <div class="field">
+              <span class="field-label">
+                <span class="d-md-none">I am joining as</span>
+                <span class="d-none d-md-inline">Select your role</span>
+              </span>
+              <div class="role-grid" role="radiogroup" aria-label="Role">
+                <div class="role-option">
+                  <input
+                    type="radio"
+                    name="role"
+                    id="roleCustomer"
+                    value="CUSTOMER"
+                    checked
+                  />
+                  <label for="roleCustomer"
+                    ><i class="bi bi-person"></i>Customer</label
+                  >
+                </div>
+                <div class="role-option">
+                  <input
+                    type="radio"
+                    name="role"
+                    id="roleOwner"
+                    value="RESTAURANT_OWNER"
+                  />
+                  <label for="roleOwner"
+                    ><i class="bi bi-shop"></i>Restaurant owner</label
+                  >
+                </div>
+                <div class="role-option">
+                  <input
+                    type="radio"
+                    name="role"
+                    id="roleDriver"
+                    value="DRIVER"
+                  />
+                  <label for="roleDriver">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <circle cx="18.5" cy="17.5" r="3.5" />
+                      <circle cx="5.5" cy="17.5" r="3.5" />
+                      <circle cx="15" cy="5" r="1" />
+                      <path d="M12 17.5V14l-3-3 4-3 2 3h2" /></svg
+                    >Driver
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="name">Full name</label>
+              <input
+                type="text"
+                id="name"
+                maxlength="100"
+                class="form-control loq-input"
+                placeholder="Omar Aly"
+                autocomplete="name"
+              />
+              <div class="field-error"></div>
+            </div>
+
+            <div class="field">
+              <label for="email">Email address</label>
+              <input
+                type="email"
+                id="email"
+                maxlength="255"
+                autocapitalize="none"
+                spellcheck="false"
+                class="form-control loq-input"
+                placeholder="omar.aly@example.com"
+                autocomplete="email"
+              />
+              <div class="field-error"></div>
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input
+                type="tel"
+                id="phone"
+                maxlength="20"
+                class="form-control loq-input"
+                placeholder="0100 000 0000"
+                autocomplete="tel"
+              />
+              <div class="field-error"></div>
+            </div>
+
+            <div class="field">
+              <label for="password">Password</label>
+              <div class="pw">
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control loq-input"
+                  placeholder="Create a password"
+                  autocomplete="new-password"
+                />
+                <button type="button" class="eye" aria-label="Show password">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+              <ul class="pw-rules" id="pwRules">
+                <li data-rule="length">
+                  <i class="bi bi-circle"></i>At least 12 characters
+                </li>
+                <li data-rule="upper">
+                  <i class="bi bi-circle"></i>One uppercase letter
+                </li>
+                <li data-rule="number">
+                  <i class="bi bi-circle"></i>One number
+                </li>
+                <li data-rule="symbol">
+                  <i class="bi bi-circle"></i>One special character
+                </li>
+              </ul>
+              <div class="field-error"></div>
+            </div>
+
+            <div class="field">
+              <label for="confirm">Confirm password</label>
+              <div class="pw">
+                <input
+                  type="password"
+                  id="confirm"
+                  class="form-control loq-input"
+                  placeholder="Confirm your password"
+                  autocomplete="new-password"
+                />
+                <button type="button" class="eye" aria-label="Show password">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+              <div class="field-error"></div>
+            </div>
+
+            <!-- Delivery address (customers only) -->
+            <section id="addressSection">
+              <h2 class="section-heading">Delivery address</h2>
+              <div id="addressList"></div>
+              <button type="button" class="add-address" id="addAddress">
+                + Add another address
+              </button>
+            </section>
+
+            <!-- Restaurant details (restaurant owners only) -->
+            <section id="restaurantSection" class="d-none">
+              <h2 class="section-heading">Restaurant details</h2>
+              <div class="sub-fields">
+                <div class="field">
+                  <label for="restName">Restaurant name</label>
+                  <input
+                    type="text"
+                    id="restName"
+                    maxlength="100"
+                    class="form-control loq-input"
+                    placeholder="Koshary El Tahrir"
+                  />
+                  <div class="field-error"></div>
+                </div>
+                <div class="field">
+                  <label for="restBranch">Branch</label>
+                  <input
+                    type="text"
+                    id="restBranch"
+                    maxlength="100"
+                    class="form-control loq-input"
+                    placeholder="Downtown"
+                  />
+                  <div class="field-error"></div>
+                </div>
+                <div class="field">
+                  <label for="restCuisine">Cuisine</label>
+                  <input
+                    type="text"
+                    id="restCuisine"
+                    maxlength="100"
+                    list="cuisineList"
+                    class="form-control loq-input"
+                    placeholder="Egyptian"
+                  />
+                  <datalist id="cuisineList">
+                    <option value="Egyptian"></option>
+                    <option value="Fast food"></option>
+                    <option value="Burgers"></option>
+                    <option value="Pizza"></option>
+                    <option value="Grills"></option>
+                    <option value="Seafood"></option>
+                    <option value="Chicken"></option>
+                    <option value="Sandwiches"></option>
+                    <option value="Italian"></option>
+                    <option value="Asian"></option>
+                    <option value="Healthy"></option>
+                    <option value="Breakfast"></option>
+                    <option value="Desserts"></option>
+                    <option value="Coffee &amp; drinks"></option>
+                  </datalist>
+                  <div class="field-error"></div>
+                </div>
+                <div class="field">
+                  <label for="restAddress">Restaurant address</label>
+                  <input
+                    type="text"
+                    id="restAddress"
+                    maxlength="255"
+                    class="form-control loq-input"
+                    placeholder="12 El-Tahrir Street, Dokki, Giza"
+                  />
+                  <div class="field-error"></div>
+                </div>
+                <div class="field">
+                  <label for="restPhone"
+                    >Restaurant phone
+                    <span class="optional">(optional)</span></label
+                  >
+                  <input
+                    type="tel"
+                    id="restPhone"
+                    maxlength="20"
+                    class="form-control loq-input"
+                    placeholder="02 0000 0000"
+                  />
+                  <div class="field-error"></div>
+                </div>
+              </div>
+
+              <h2 class="section-heading">Location</h2>
+              <div class="sub-fields">
+                <div class="field">
+                  <label for="locQuery">Pin your restaurant on the map</label>
+                  <div class="loc-search">
+                    <input
+                      type="text"
+                      id="locQuery"
+                      maxlength="255"
+                      class="form-control loq-input"
+                      placeholder="Search an address or landmark"
+                      autocomplete="off"
+                    />
+                    <button type="button" id="locSearchBtn" class="btn-ghost">
+                      Search
+                    </button>
+                  </div>
+                  <button type="button" id="useMyLocation" class="link-btn">
+                    <i class="bi bi-geo-alt"></i> Use my current location
+                  </button>
+                  <div class="field-error"></div>
+                  <div
+                    id="locMap"
+                    class="loc-map"
+                    role="application"
+                    aria-label="Map. Tap to place your restaurant pin."
+                  ></div>
+                  <div id="locReadout" class="loc-readout">
+                    No location selected yet. Search, use your current location,
+                    or tap the map.
+                  </div>
+                </div>
+              </div>
+
+              <h2 class="section-heading">Photos</h2>
+              <div class="sub-fields">
+                <div class="field">
+                  <label>Logo <span class="optional">(optional)</span></label>
+                  <div class="upload">
+                    <div class="upload-preview" id="logoPreview">
+                      <i class="bi bi-image"></i>
+                    </div>
+                    <div class="upload-body">
+                      <input
+                        type="file"
+                        id="logoFile"
+                        class="visually-hidden"
+                        accept="image/png,image/jpeg,image/webp"
+                      />
+                      <label for="logoFile" class="upload-btn"
+                        >Choose image</label
+                      >
+                      <button
+                        type="button"
+                        id="logoRemove"
+                        class="remove-address d-none"
+                      >
+                        Remove
+                      </button>
+                      <div class="upload-hint">
+                        PNG, JPG or WebP, up to 2 MB. A square image works best.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field-error"></div>
+                </div>
+                <div class="field">
+                  <label
+                    >Cover image <span class="optional">(optional)</span></label
+                  >
+                  <div class="upload cover">
+                    <div class="upload-preview" id="coverPreview">
+                      <i class="bi bi-image"></i>
+                    </div>
+                    <div class="upload-body">
+                      <input
+                        type="file"
+                        id="coverFile"
+                        class="visually-hidden"
+                        accept="image/png,image/jpeg,image/webp"
+                      />
+                      <label for="coverFile" class="upload-btn"
+                        >Choose image</label
+                      >
+                      <button
+                        type="button"
+                        id="coverRemove"
+                        class="remove-address d-none"
+                      >
+                        Remove
+                      </button>
+                      <div class="upload-hint">
+                        PNG, JPG or WebP, up to 5 MB. A wide image works best.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field-error"></div>
+                </div>
+              </div>
+
+              <h2 class="section-heading">Delivery settings</h2>
+              <div class="sub-fields">
+                <div class="field-row">
+                  <div class="field">
+                    <label for="deliveryFee">Delivery fee (EGP)</label>
+                    <input
+                      type="number"
+                      id="deliveryFee"
+                      min="0"
+                      step="0.5"
+                      inputmode="decimal"
+                      value="0"
+                      class="form-control loq-input"
+                    />
+                    <div class="field-error"></div>
+                  </div>
+                  <div class="field">
+                    <label for="minOrder">Minimum order (EGP)</label>
+                    <input
+                      type="number"
+                      id="minOrder"
+                      min="0"
+                      step="0.5"
+                      inputmode="decimal"
+                      value="0"
+                      class="form-control loq-input"
+                    />
+                    <div class="field-error"></div>
+                  </div>
+                  <div class="field">
+                    <label for="prepTime">Preparation time (min)</label>
+                    <input
+                      type="number"
+                      id="prepTime"
+                      min="1"
+                      step="1"
+                      inputmode="numeric"
+                      value="25"
+                      class="form-control loq-input"
+                    />
+                    <div class="field-error"></div>
+                  </div>
+                  <div class="field">
+                    <label for="maxDistance">Max delivery distance (km)</label>
+                    <input
+                      type="number"
+                      id="maxDistance"
+                      min="1"
+                      step="0.5"
+                      inputmode="decimal"
+                      value="15"
+                      class="form-control loq-input"
+                    />
+                    <div class="field-error"></div>
+                  </div>
+                </div>
+              </div>
+              <p class="field-hint">
+                You can change these later, and add your logo, opening hours and
+                menu from your restaurant account.
+              </p>
+            </section>
+
+            <!-- Courier details (drivers only) -->
+            <section id="driverSection" class="d-none">
+              <h2 class="section-heading">Courier details</h2>
+              <div class="sub-fields">
+                <div class="field">
+                  <label for="nationalId">National ID</label>
+                  <input
+                    type="text"
+                    id="nationalId"
+                    maxlength="14"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    class="form-control loq-input"
+                    placeholder="29801010000000"
+                  />
+                  <div class="field-error"></div>
+                </div>
+                <div class="field">
+                  <label for="plateNumber">Plate number</label>
+                  <input
+                    type="text"
+                    id="plateNumber"
+                    maxlength="20"
+                    autocomplete="off"
+                    autocapitalize="characters"
+                    class="form-control loq-input"
+                    placeholder="ABC 1234"
+                  />
+                  <div class="field-error"></div>
+                </div>
+                <div class="field">
+                  <label for="drivingLicense">Driving license number</label>
+                  <input
+                    type="text"
+                    id="drivingLicense"
+                    maxlength="50"
+                    autocomplete="off"
+                    autocapitalize="characters"
+                    class="form-control loq-input"
+                    placeholder="DL-99948201"
+                  />
+                  <div class="field-error"></div>
+                </div>
+              </div>
+            </section>
+
+            <button type="submit" id="submitBtn" class="btn-loq">
+              <span
+                class="spinner-border spinner-border-sm d-none"
+                id="spinner"
+                aria-hidden="true"
+              ></span>
+              <span id="btnText">Create account</span>
+            </button>
+          </form>
+
+          <p class="switch-line">
+            Already have an account?
+            <a href="login.html" class="link-red">Log in</a>
+          </p>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="js/register.js"></script>
+  </body>
+</html>

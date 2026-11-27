@@ -1,7 +1,7 @@
 package com.loqma.notification.controller;
 
 import com.loqma.notification.dto.NotificationRequest;
-import com.loqma.notification.entity.Notification;
+import com.loqma.notification.dto.NotificationResponse;
 import com.loqma.notification.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,17 +16,17 @@ public class NotificationController {
     private final NotificationService notificationService;
 
     @PostMapping
-    public Notification create(@RequestBody NotificationRequest request) {
-        return notificationService.create(request.userId(), request.message());
+    public NotificationResponse create(@RequestBody NotificationRequest request) {
+        return notificationService.create(request);
     }
 
     @GetMapping
-    public List<Notification> getForUser(@RequestParam Long userId) {
+    public List<NotificationResponse> getForUser(@RequestParam String userId) {
         return notificationService.getForUser(userId);
     }
 
     @PatchMapping("/{id}/read")
-    public Notification markAsRead(@PathVariable Long id) {
+    public NotificationResponse markAsRead(@PathVariable String id) {
         return notificationService.markAsRead(id);
     }
 }
