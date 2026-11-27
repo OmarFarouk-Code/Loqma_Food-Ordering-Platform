@@ -1,0 +1,82 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap");
+body {
+  font-family: "Roboto Flex", sans-serif;
+}
+.custom-heading {
+  font-family: "Roboto Flex", sans-serif;
+  font-weight: 600;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 100;
+}
+.loqma-brand {
+  font-family: "Roboto Flex", sans-serif;
+  font-weight: 700;
+  font-size: 1.75rem; /* ~28px */
+  color: #ff0000 !important;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.loqma-brand:hover {
+  color: #e60000 !important;
+}
+.status-pill {
+  background-color: #eaf5ee;
+  color: #1e7e3e;
+  height: 34px;
+  padding-left: 12px !important;
+  padding-right: 8px !important;
+  border-radius: 9999px !important;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #1e7e3e;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
+.status-label {
+  font-family: "Roboto Flex", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.status-switch {
+  width: 38px !important;
+  height: 22px !important;
+  cursor: pointer;
+  border: none !important;
+  background-color: #cbd5e1;
+  transition:
+    background-position 0.2s ease-in-out,
+    background-color 0.2s ease;
+}
+.status-switch:checked {
+  background-color: #1e7e3e !important;
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3.1' fill='%23ffffff'/%3e%3c/svg%3e");
+}
+.status-switch:focus {
+  box-shadow: none !important;
+}
+.status-pill.is-closed {
+  background-color: #fce8e6;
+  color: #c5221f;
+}
+.status-pill.is-closed .status-dot {
+  background-color: #c5221f;
+}
+@media (min-width: 10px) and (max-width: 600px) {
+  .branch-name {
+    font-size: small;
+  }
+}

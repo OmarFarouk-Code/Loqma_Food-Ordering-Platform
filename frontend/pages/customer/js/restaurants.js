@@ -24,7 +24,10 @@
  * @returns {Promise<{items: Object[], page: number, size: number, totalItems: number, totalPages: number, hasNext: boolean}>}
  */
 async function fetchRestaurants(params = {}) {
-  const BASE = (typeof API_BASE_URL !== "undefined") ? API_BASE_URL : "http://localhost:8080";
+  const BASE =
+    typeof API_BASE_URL !== "undefined"
+      ? API_BASE_URL
+      : "http://localhost:8080";
   const query = new URLSearchParams();
 
   if (params.cuisine) query.set("cuisine", params.cuisine);
@@ -35,7 +38,8 @@ async function fetchRestaurants(params = {}) {
     query.set("lat", params.lat);
     query.set("lng", params.lng);
   }
-  if (params.maxDeliveryTime != null) query.set("maxDeliveryTime", params.maxDeliveryTime);
+  if (params.maxDeliveryTime != null)
+    query.set("maxDeliveryTime", params.maxDeliveryTime);
   if (params.page != null) query.set("page", params.page);
   if (params.size != null) query.set("size", params.size);
 
@@ -46,7 +50,10 @@ async function fetchRestaurants(params = {}) {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
-  if (!res.ok) throw new Error(`Failed to load restaurants: ${res.status} ${res.statusText}`);
+  if (!res.ok)
+    throw new Error(
+      `Failed to load restaurants: ${res.status} ${res.statusText}`,
+    );
 
   const data = await res.json();
   if (Array.isArray(data)) {
@@ -75,12 +82,21 @@ async function fetchRestaurants(params = {}) {
  * @returns {Promise<{isFavorite: boolean}>}
  */
 async function toggleFavorite(restaurantId) {
-  const BASE = (typeof API_BASE_URL !== "undefined") ? API_BASE_URL : "http://localhost:8080";
-  const res = await fetch(`${BASE}/api/customer/restaurants/${encodeURIComponent(restaurantId)}/favorite`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-  });
-  if (!res.ok) throw new Error(`Failed to toggle favourite: ${res.status} ${res.statusText}`);
+  const BASE =
+    typeof API_BASE_URL !== "undefined"
+      ? API_BASE_URL
+      : "http://localhost:8080";
+  const res = await fetch(
+    `${BASE}/api/customer/restaurants/${encodeURIComponent(restaurantId)}/favorite`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    },
+  );
+  if (!res.ok)
+    throw new Error(
+      `Failed to toggle favourite: ${res.status} ${res.statusText}`,
+    );
   return res.json();
 }
 
@@ -92,12 +108,13 @@ async function toggleFavorite(restaurantId) {
  * @returns {string}  HTML string
  */
 function buildRestaurantCard(r) {
-  const ratingHtml = r.averageRating != null
-    ? `<div class="restaurant-card__rating">
+  const ratingHtml =
+    r.averageRating != null
+      ? `<div class="restaurant-card__rating">
          <span class="material-symbols-outlined restaurant-card__star">star</span>
          <span class="restaurant-card__rating-value">${Number(r.averageRating).toFixed(1)}</span>
        </div>`
-    : "";
+      : "";
 
   let badgeHtml = "";
   if (r.isOpen === false) {
@@ -111,7 +128,10 @@ function buildRestaurantCard(r) {
 
   let deliveryFeeText = "";
   if (r.deliveryFee != null) {
-    deliveryFeeText = Number(r.deliveryFee) === 0 ? "Free delivery" : `EGP ${r.deliveryFee} delivery`;
+    deliveryFeeText =
+      Number(r.deliveryFee) === 0
+        ? "Free delivery"
+        : `EGP ${r.deliveryFee} delivery`;
   }
 
   let timeText = "";
@@ -126,13 +146,17 @@ function buildRestaurantCard(r) {
   const locationOrBranch = r.branch || r.address;
   const cuisine = [r.cuisine, locationOrBranch].filter(Boolean).join(", ");
 
-  const imgSrc = (r.coverImage && r.coverImage.trim() !== "")
-    ? r.coverImage
-    : (r.logo && r.logo.trim() !== "" ? r.logo : "https://placehold.co/400x240?text=Loqma");
+  const imgSrc =
+    r.coverImage && r.coverImage.trim() !== ""
+      ? r.coverImage
+      : r.logo && r.logo.trim() !== ""
+        ? r.logo
+        : "https://placehold.co/400x240?text=Loqma";
 
-  const imgClass = r.isOpen === false
-    ? "restaurant-card__image restaurant-card__image--closed"
-    : "restaurant-card__image";
+  const imgClass =
+    r.isOpen === false
+      ? "restaurant-card__image restaurant-card__image--closed"
+      : "restaurant-card__image";
 
   const isFav = Boolean(r.isFavorite);
   const favBtnClass = isFav ? "favorite-button is-favorite" : "favorite-button";
@@ -200,7 +224,8 @@ function attachCardClickListeners(scope) {
     card.addEventListener("click", (e) => {
       if (e.target.closest("button, a")) return;
       const id = card.dataset.id;
-      if (id) window.location.href = `restaurant.html?id=${encodeURIComponent(id)}`;
+      if (id)
+        window.location.href = `restaurant.html?id=${encodeURIComponent(id)}`;
     });
   });
 }
@@ -212,7 +237,9 @@ function attachCardClickListeners(scope) {
  */
 function renderSkeletons(container, count = 4) {
   if (!container) return;
-  container.innerHTML = Array.from({ length: count }, () => `
+  container.innerHTML = Array.from(
+    { length: count },
+    () => `
     <div class="col-12 col-sm-6 col-lg-3">
       <div class="restaurant-card restaurant-card--skeleton">
         <div class="restaurant-card__image-box skeleton-box"></div>
@@ -222,7 +249,8 @@ function renderSkeletons(container, count = 4) {
           <div class="skeleton-line skeleton-line--short"></div>
         </div>
       </div>
-    </div>`).join("");
+    </div>`,
+  ).join("");
 }
 
 /**
@@ -296,9 +324,11 @@ function attachFavoriteListeners(scope) {
         const result = await toggleFavorite(restaurantId);
         const confirmed = Boolean(result?.isFavorite);
         setFavoriteButtonState(btn, confirmed);
-        document.dispatchEvent(new CustomEvent("restaurant-favorite-toggled", {
-          detail: { restaurantId, isFavorite: confirmed },
-        }));
+        document.dispatchEvent(
+          new CustomEvent("restaurant-favorite-toggled", {
+            detail: { restaurantId, isFavorite: confirmed },
+          }),
+        );
       } catch (err) {
         console.error("[Loqma] Could not save favourite:", err);
         setFavoriteButtonState(btn, previous);
@@ -324,7 +354,7 @@ function filterRestaurants(restaurants, query) {
     (r) =>
       (r.name || "").toLowerCase().includes(q) ||
       (r.cuisine || "").toLowerCase().includes(q) ||
-      (r.branch || "").toLowerCase().includes(q)
+      (r.branch || "").toLowerCase().includes(q),
   );
 }
 
@@ -349,9 +379,14 @@ function escapeHtml(str) {
  * @param {string|string[]} options.containerIds  One or more IDs of .row elements to fill.
  * @param {number}  [options.featuredCount=4]  How many cards go in the first container.
  */
-async function loadRestaurantsIntoPage({ containerIds = [], featuredCount = 4 } = {}) {
+async function loadRestaurantsIntoPage({
+  containerIds = [],
+  featuredCount = 4,
+} = {}) {
   const ids = Array.isArray(containerIds) ? containerIds : [containerIds];
-  const containers = ids.map((id) => document.getElementById(id)).filter(Boolean);
+  const containers = ids
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
 
   if (containers.length === 0) return;
 
@@ -378,7 +413,10 @@ async function loadRestaurantsIntoPage({ containerIds = [], featuredCount = 4 } 
       if (containers.length === 1 || query.trim() !== "") {
         renderRestaurants(containers[0], filtered);
         if (containers[1]) {
-          renderRestaurants(containers[1], query.trim() ? [] : all.slice(featuredCount));
+          renderRestaurants(
+            containers[1],
+            query.trim() ? [] : all.slice(featuredCount),
+          );
         }
       } else {
         renderRestaurants(containers[0], all.slice(0, featuredCount));
@@ -394,7 +432,9 @@ async function loadRestaurantsIntoPage({ containerIds = [], featuredCount = 4 } 
     }
 
     if (searchInput) {
-      searchInput.addEventListener("input", (e) => handleSearch(e.target.value));
+      searchInput.addEventListener("input", (e) =>
+        handleSearch(e.target.value),
+      );
       searchInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
           e.preventDefault();
@@ -403,10 +443,14 @@ async function loadRestaurantsIntoPage({ containerIds = [], featuredCount = 4 } 
       });
     }
     if (searchSubmitBtn && searchInput) {
-      searchSubmitBtn.addEventListener("click", () => redirectToList(searchInput.value));
+      searchSubmitBtn.addEventListener("click", () =>
+        redirectToList(searchInput.value),
+      );
     }
     if (headerSearchInput) {
-      headerSearchInput.addEventListener("input", (e) => handleSearch(e.target.value));
+      headerSearchInput.addEventListener("input", (e) =>
+        handleSearch(e.target.value),
+      );
       headerSearchInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
           e.preventDefault();
@@ -416,6 +460,8 @@ async function loadRestaurantsIntoPage({ containerIds = [], featuredCount = 4 } 
     }
   } catch (err) {
     console.error("[Loqma] Could not load restaurants:", err);
-    containers.forEach((c) => renderError(c, "Could not load restaurants. Please try again later."));
+    containers.forEach((c) =>
+      renderError(c, "Could not load restaurants. Please try again later."),
+    );
   }
 }
