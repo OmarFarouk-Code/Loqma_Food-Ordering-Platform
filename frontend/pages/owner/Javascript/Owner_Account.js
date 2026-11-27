@@ -23,6 +23,9 @@ const ownerNameInput =
   document.getElementById("ownerName") ||
   document.getElementById("fullName") ||
   document.querySelector('input[name="ownerName"]');
+const navbarOwnerName =
+  document.getElementById("navbarOwnerName") ||
+  document.querySelector(".username .fs-6");
 const ownerPhoneInput = document.getElementById("ownerPhone");
 const ownerEmailInput = document.getElementById("ownerEmail");
 const restaurantNameInput = document.getElementById("restaurantName");
@@ -94,6 +97,9 @@ async function loadAccountData() {
     currentProfile = data;
 
     if (ownerNameInput) ownerNameInput.value = data.ownerName || "";
+    if (navbarOwnerName) {
+      navbarOwnerName.textContent = data.ownerName || "Owner";
+    }
     if (ownerPhoneInput)
       ownerPhoneInput.value = data.ownerPhone ?? data.phone ?? "";
     if (ownerEmailInput)
@@ -207,6 +213,9 @@ async function saveAccountData() {
     }
 
     currentProfile = await response.json();
+    if (navbarOwnerName && currentProfile.ownerName) {
+      navbarOwnerName.textContent = currentProfile.ownerName;
+    }
     if (resolvedOwnerNameInput && currentProfile.ownerName) {
       resolvedOwnerNameInput.value = currentProfile.ownerName;
     }
