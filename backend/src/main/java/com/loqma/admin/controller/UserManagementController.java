@@ -2,13 +2,12 @@ package com.loqma.admin.controller;
 
 import com.loqma.admin.dto.UserResponse;
 import com.loqma.admin.service.UserManagementService;
-import com.loqma.auth.entity.AccountStatus;
-import com.loqma.auth.entity.UserRole;
+import com.loqma.common.enums.AccountStatus;
+import com.loqma.common.enums.UserRole;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/admin/users")
@@ -30,13 +29,13 @@ public class UserManagementController {
 
     // GET /api/admin/users/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getUserById(@PathVariable UUID id) {
+    public ResponseEntity<UserResponse> getUserById(@PathVariable String id) {
         return ResponseEntity.ok(userManagementService.getUserById(id));
     }
 
     // PATCH /api/admin/users/{id}/toggle-active
     @PatchMapping("/{id}/toggle-active")
-    public ResponseEntity<UserResponse> toggleUserActiveState(@PathVariable UUID id) {
+    public ResponseEntity<UserResponse> toggleUserActiveState(@PathVariable String id) {
         return ResponseEntity.ok(userManagementService.toggleUserActiveState(id));
     }
 }
