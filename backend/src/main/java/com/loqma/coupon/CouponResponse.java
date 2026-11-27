@@ -1,5 +1,7 @@
 package com.loqma.coupon;
 
+import com.loqma.order.entity.Coupon;
+
 import com.loqma.admin.entity.Coupon;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -20,8 +22,16 @@ public record CouponResponse(
 ) {
     public static CouponResponse from(Coupon c) {
         return new CouponResponse(
-                c.getId(), c.getName(), c.getCode(), c.getDiscountAmount(), c.getExpiryDate(),
-                c.getMinimumOrderAmount(), c.isActive(), c.getUsageCount(),
-                c.getCreatedAt(), c.getUpdatedAt());
+                c.getId(),
+                c.getName(),
+                c.getCode(),
+                c.getDiscountAmount() == null ? BigDecimal.ZERO : BigDecimal.valueOf(c.getDiscountAmount()),
+                c.getExpiryDate(),
+                c.getMinimumOrderAmount() == null ? BigDecimal.ZERO : BigDecimal.valueOf(c.getMinimumOrderAmount()),
+                Boolean.TRUE.equals(c.getIsActive()),
+                c.getUsageCount() == null ? 0 : c.getUsageCount(),
+                c.getCreatedAt(),
+                c.getUpdatedAt()
+        );
     }
 }

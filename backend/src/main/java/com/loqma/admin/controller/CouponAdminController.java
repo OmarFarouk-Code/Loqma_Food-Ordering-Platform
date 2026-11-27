@@ -23,7 +23,9 @@ public class CouponAdminController {
 
     private final CouponService service;
 
-    public CouponAdminController(CouponService service) { this.service = service; }
+    public CouponAdminController(CouponService service) {
+        this.service = service;
+    }
 
     /** Create coupon -> 201 + Location. */
     @PostMapping
@@ -43,7 +45,9 @@ public class CouponAdminController {
     }
 
     @GetMapping("/{id}")
-    public CouponResponse get(@PathVariable String id) { return service.get(id); }
+    public CouponResponse get(@PathVariable String id) {
+        return service.get(id);
+    }
 
     /** Edit coupon. 409 if already used. */
     @PutMapping("/{id}")
@@ -53,9 +57,13 @@ public class CouponAdminController {
 
     /** Activate. 409 if already used. */
     @PatchMapping("/{id}/activate")
-    public CouponResponse activate(@PathVariable String id) { return service.setActive(id, true); }
+    public CouponResponse activate(@PathVariable String id) {
+        return service.setActive(id, true);
+    }
 
     /** Deactivate. 409 if already used. */
     @PatchMapping("/{id}/deactivate")
-    public CouponResponse deactivate(@PathVariable String id) { return service.setActive(id, false); }
+    public CouponResponse deactivate(@PathVariable String id) {
+        return service.setActive(id, false);
+    }
 }

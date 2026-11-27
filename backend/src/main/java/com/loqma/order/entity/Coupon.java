@@ -4,6 +4,7 @@ import com.loqma.admin.entity.Admin;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Entity
@@ -49,4 +50,39 @@ public class Coupon {
     @Column(name = "usage_count", nullable = false)
     @Builder.Default
     private Integer usageCount = 0;
+
+    @Column(name = "created_at", updatable = false)
+    private Instant createdAt;
+
+    @Column(name = "updated_at")
+    private Instant updatedAt;
+
+    @PrePersist
+    void onCreate() {
+        Instant now = Instant.now();
+        if (createdAt == null) createdAt = now;
+        updatedAt = now;
+    }
+
+    @PreUpdate
+    void onUpdate() {
+        updatedAt = Instant.now();
+    }
+
+    public boolean isExpired() {
+        return expiryDate != null && LocalDate.now().isAfter(expiryDate);
+    }
+
+    public boolean isUsed() {
+        return usageCount != null && usageCount > 0;
+    }
+
+    public boolean isValid(double cartSubtotal) {
+        double min = minimumOrderAmount == null ? 0.0 : minimumOrderAmount;
+        return Boolean.TRUE.equals(isActive) && !isExpired() && cartSubtotal >= min;
+    }
+
+    public void incrementUsage() {
+        usageCount = (usageCount == null ? 0 : usageCount) + 1;
+    }
 }

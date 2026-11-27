@@ -6,7 +6,7 @@ import com.loqma.common.enums.UserRole;
 
 public class UserResponse {
 
-    private String id;
+    private UUID id;
     private String fullName;
     private String email;
     private String phone;
@@ -18,17 +18,18 @@ public class UserResponse {
     public static UserResponse fromEntity(User user) {
         UserResponse dto = new UserResponse();
         dto.id = user.getId();
-        dto.fullName = user.getName();
+        dto.fullName = user.getFullName();
         dto.email = user.getEmail();
         dto.phone = user.getPhone();
         dto.role = user.getRole();
         dto.status = user.getStatus();
         dto.rejectionReason = user.getRejectionReason();
         dto.reapplicationAttempts = user.getReapplicationAttempts();
+        dto.createdAt = user.getCreatedAt();
         return dto;
     }
 
-    public String getId() { return id; }
+    public UUID getId() { return id; }
     public String getFullName() { return fullName; }
     public String getEmail() { return email; }
     public String getPhone() { return phone; }
