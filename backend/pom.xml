@@ -72,12 +72,33 @@
       <artifactId>spring-security-test</artifactId>
       <scope>test</scope>
     </dependency>
+<<<<<<< HEAD
 
     <dependency>
       <groupId>com.cloudinary</groupId>
         <artifactId>cloudinary-http5</artifactId>
         <version>2.4.0</version>
       </dependency>
+=======
+    <!-- JWT (login tokens) -->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-api</artifactId>
+      <version>0.12.6</version>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-impl</artifactId>
+      <version>0.12.6</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-jackson</artifactId>
+      <version>0.12.6</version>
+      <scope>runtime</scope>
+    </dependency>
+>>>>>>> 7ff03a592df2d174180f539a300b0cfe59045402
   </dependencies>
 
   <build>
