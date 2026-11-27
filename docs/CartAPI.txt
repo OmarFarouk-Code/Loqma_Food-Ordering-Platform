@@ -1,0 +1,14 @@
+@ {URL}/api/carts
+
+GET:
+- Get all items in the cart @ /{cartId}
+- Get reciept for the cart @ /{cartId}/receipt
+
+POST:
+- Add item to the cart @ /{cartId}
+
+PATCH:
+- Update item quantity in the cart @ /{cartItemId}
+
+DELETE:
+- Remove item from the cart @ /{cartItemId}
