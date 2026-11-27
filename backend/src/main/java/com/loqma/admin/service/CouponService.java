@@ -1,6 +1,12 @@
-package com.loqma.coupon;
+package com.loqma.admin.service;
 
-import com.loqma.coupon.exception.*;
+import com.loqma.coupon.AdminCouponRepository;
+import com.loqma.coupon.CouponRequest;
+import com.loqma.coupon.CouponResponse;
+import com.loqma.coupon.exception.CouponLockedException;
+import com.loqma.coupon.exception.CouponNotFoundException;
+import com.loqma.coupon.exception.DuplicateCouponCodeException;
+import com.loqma.order.entity.Coupon;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,9 +17,11 @@ import java.util.Locale;
 @Service
 public class CouponService {
 
-    private final CouponRepository repo;
+    private final AdminCouponRepository repo;
 
-    public CouponService(CouponRepository repo) { this.repo = repo; }
+    public CouponService(AdminCouponRepository repo) {
+        this.repo = repo;
+    }
 
     @Transactional
     public CouponResponse create(CouponRequest req) {
@@ -22,13 +30,13 @@ public class CouponService {
 
         Coupon c = new Coupon();
         apply(c, req, code);
-        c.setActive(true);
+        c.setIsActive(true);
         return CouponResponse.from(repo.save(c));
     }
 
     @Transactional(readOnly = true)
     public Page<CouponResponse> list(Boolean active, Pageable pageable) {
-        Page<Coupon> page = (active == null) ? repo.findAll(pageable) : repo.findByActive(active, pageable);
+        Page<Coupon> page = (active == null) ? repo.findAll(pageable) : repo.findByIsActive(active, pageable);
         return page.map(CouponResponse::from);
     }
 
@@ -52,9 +60,9 @@ public class CouponService {
     @Transactional
     public CouponResponse setActive(String id, boolean active) {
         Coupon c = repo.findByIdForUpdate(id).orElseThrow(() -> new CouponNotFoundException(id));
-        if (c.isActive() == active) return CouponResponse.from(c);   // idempotent
+        if (Boolean.TRUE.equals(c.getIsActive()) == active) return CouponResponse.from(c);
         assertNotUsed(c, active ? "activated" : "deactivated");
-        c.setActive(active);
+        c.setIsActive(active);
         return CouponResponse.from(c);
     }
 
@@ -71,10 +79,12 @@ public class CouponService {
     private void apply(Coupon c, CouponRequest r, String code) {
         c.setName(r.name().trim());
         c.setCode(code);
-        c.setDiscountAmount(r.discountAmount());
+        c.setDiscountAmount(r.discountAmount().doubleValue());
         c.setExpiryDate(r.expiryDate());
-        c.setMinimumOrderAmount(r.minimumOrderAmount());
+        c.setMinimumOrderAmount(r.minimumOrderAmount().doubleValue());
     }
 
-    private String normalize(String code) { return code.trim().toUpperCase(Locale.ROOT); }
+    private String normalize(String code) {
+        return code.trim().toUpperCase(Locale.ROOT);
+    }
 }

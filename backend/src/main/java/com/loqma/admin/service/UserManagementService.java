@@ -2,16 +2,15 @@ package com.loqma.admin.service;
 
 import com.loqma.admin.dto.UserResponse;
 import com.loqma.admin.repository.AdminUserRepository;
-import com.loqma.auth.entity.AccountStatus;
 import com.loqma.auth.entity.User;
-import com.loqma.auth.entity.UserRole;
+import com.loqma.common.enums.AccountStatus;
+import com.loqma.common.enums.UserRole;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserManagementService {
@@ -38,14 +37,14 @@ public class UserManagementService {
     }
 
     @Transactional(readOnly = true)
-    public UserResponse getUserById(UUID userId) {
+    public UserResponse getUserById(String userId) {
         User user = adminUserRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
         return UserResponse.fromEntity(user);
     }
 
     @Transactional
-    public UserResponse toggleUserActiveState(UUID userId) {
+    public UserResponse toggleUserActiveState(String userId) {
         User user = adminUserRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 

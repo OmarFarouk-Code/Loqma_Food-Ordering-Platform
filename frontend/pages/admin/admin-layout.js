@@ -51,8 +51,9 @@ function renderAdminLayout() {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
   document.getElementById('logout-btn').addEventListener('click', () => {
-    // No auth yet. Replace with real logout when the auth pages exist.
-    alert('Logout is not connected yet.');
+    localStorage.removeItem('loqma_token');
+    localStorage.removeItem('loqma_role');
+    window.location.href = '../auth/login.html';
   });
 }
 
