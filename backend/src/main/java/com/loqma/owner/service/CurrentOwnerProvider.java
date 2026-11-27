@@ -5,11 +5,13 @@ import com.loqma.owner.exception.ResourceNotFoundException;
 import com.loqma.owner.repository.OwnerRepository;
 import com.loqma.owner.repository.OwnerRestaurantRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
- * TEMPORARY: always returns the seeded test owner.
- * When Team 3's login is merged, change ONLY getOwnerId() to read the real logged-in user.
+ * Resolves the authenticated restaurant owner when logged in, falling back to
+ * the seeded test owner when unauthenticated during local development.
  */
 @Component
 @RequiredArgsConstructor
@@ -21,6 +23,13 @@ public class CurrentOwnerProvider {
     private final OwnerRestaurantRepository restaurantRepository;
 
     public String getOwnerId() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated()
+                && auth.getPrincipal() instanceof String userId
+                && !"anonymousUser".equals(userId)
+                && ownerRepository.existsById(userId)) {
+            return userId;
+        }
         return ownerRepository.findByEmail(FAKE_OWNER_EMAIL)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Test owner not found. Restart the backend so the seeder runs."))
