@@ -6,8 +6,14 @@
     <title>Loqma Homepage</title>
 
     <!-- Fonts and icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -19,13 +25,20 @@
   <body>
     <!-- HEADERRRRR -->
     <header class="site-header">
-      <div class="page-container site-header__inner d-flex align-items-center justify-content-between">
+      <div
+        class="page-container site-header__inner d-flex align-items-center justify-content-between"
+      >
         <!-- Logo + main navigation -->
         <div class="site-header__left d-flex align-items-center flex-shrink-0">
           <a class="brand-logo" href="#">Loqma</a>
 
           <nav class="main-nav d-none d-md-flex align-items-center">
-            <a class="main-nav__link main-nav__link--active" aria-current="page" href="#">Home</a>
+            <a
+              class="main-nav__link main-nav__link--active"
+              aria-current="page"
+              href="#"
+              >Home</a
+            >
             <a class="main-nav__link" href="#">Orders</a>
             <a class="main-nav__link" href="#">Promotions</a>
           </nav>
@@ -34,8 +47,14 @@
         <!-- Search -->
         <div class="header-search d-none d-md-flex align-items-center">
           <div class="header-search__box d-flex align-items-center">
-            <span class="material-symbols-outlined header-search__icon">search</span>
-            <input class="header-search__input" type="text" placeholder="Search restaurants or dishes" />
+            <span class="material-symbols-outlined header-search__icon"
+              >search</span
+            >
+            <input
+              class="header-search__input"
+              type="text"
+              placeholder="Search restaurants or dishes"
+            />
           </div>
         </div>
 
@@ -55,8 +74,12 @@
             <div class="user-menu__avatar">
               <span class="material-symbols-outlined icon-18">person</span>
             </div>
-            <span class="user-menu__name d-none d-lg-inline-block">Omar Aly</span>
-            <span class="material-symbols-outlined user-menu__arrow">expand_more</span>
+            <span class="user-menu__name d-none d-lg-inline-block"
+              >Omar Aly</span
+            >
+            <span class="material-symbols-outlined user-menu__arrow"
+              >expand_more</span
+            >
           </div>
         </div>
       </div>
@@ -67,21 +90,44 @@
       <!-- ---------- Hero: red search band ---------- -->
       <div class="page-container hero-wrapper">
         <div class="hero">
-          <div class="hero__top d-flex flex-column flex-md-row align-items-md-end justify-content-between">
+          <div
+            class="hero__top d-flex flex-column flex-md-row align-items-md-end justify-content-between"
+          >
             <h1 class="hero__title">Skip the cooking, we've got your back.</h1>
 
             <div class="search-tabs d-flex align-items-center">
-              <button class="search-tabs__tab search-tabs__tab--active" id="tab-restaurants" type="button">Restaurants</button>
-              <button class="search-tabs__tab" id="tab-dishes" type="button">Dishes</button>
+              <button
+                class="search-tabs__tab search-tabs__tab--active"
+                id="tab-restaurants"
+                type="button"
+              >
+                Restaurants
+              </button>
+              <button class="search-tabs__tab" id="tab-dishes" type="button">
+                Dishes
+              </button>
             </div>
           </div>
 
           <div class="hero-search">
             <div class="hero-search__box d-flex align-items-center">
-              <span class="material-symbols-outlined hero-search__icon">search</span>
-              <input class="hero-search__input" id="main-search-input" type="text" placeholder="Search restaurants" />
-              <button class="hero-search__submit" type="button" aria-label="Submit search">
-                <span class="material-symbols-outlined icon-20">arrow_forward</span>
+              <span class="material-symbols-outlined hero-search__icon"
+                >search</span
+              >
+              <input
+                class="hero-search__input"
+                id="main-search-input"
+                type="text"
+                placeholder="Search restaurants"
+              />
+              <button
+                class="hero-search__submit"
+                type="button"
+                aria-label="Submit search"
+              >
+                <span class="material-symbols-outlined icon-20"
+                  >arrow_forward</span
+                >
               </button>
             </div>
           </div>
@@ -90,7 +136,9 @@
 
       <!-- ---------- Cuisine shortcuts ---------- -->
       <div class="page-container cuisine-bar-wrapper">
-        <div class="cuisine-bar d-flex align-items-center justify-content-between">
+        <div
+          class="cuisine-bar d-flex align-items-center justify-content-between"
+        >
           <a class="cuisine-item" href="restaurant-list.html?cuisine=Burgers">
             <div class="cuisine-item__image-box">
               <img
@@ -205,9 +253,13 @@
 
       <!-- ---------- Featured restaurants ---------- -->
       <section class="page-container restaurant-section">
-        <div class="section-heading d-flex align-items-center justify-content-between">
+        <div
+          class="section-heading d-flex align-items-center justify-content-between"
+        >
           <h2 class="section-heading__title">Featured restaurants</h2>
-          <a class="section-heading__link" href="restaurant-list.html">View all</a>
+          <a class="section-heading__link" href="restaurant-list.html"
+            >View all</a
+          >
         </div>
 
         <!-- Populated dynamically by restaurants.js -->
@@ -216,9 +268,13 @@
 
       <!-- ---------- Popular near you ---------- -->
       <section class="page-container restaurant-section">
-        <div class="section-heading d-flex align-items-center justify-content-between">
+        <div
+          class="section-heading d-flex align-items-center justify-content-between"
+        >
           <h2 class="section-heading__title">Popular near you</h2>
-          <a class="section-heading__link" href="restaurant-list.html">View all</a>
+          <a class="section-heading__link" href="restaurant-list.html"
+            >View all</a
+          >
         </div>
 
         <!-- Populated dynamically by restaurants.js -->
@@ -242,7 +298,9 @@
 
     <!--SITE FOOTER -->
     <footer class="site-footer">
-      <div class="page-container site-footer__inner d-flex flex-wrap align-items-center justify-content-center">
+      <div
+        class="page-container site-footer__inner d-flex flex-wrap align-items-center justify-content-center"
+      >
         <a class="site-footer__link" href="#">Help</a>
         <span>•</span>
         <a class="site-footer__link" href="#">About Loqma</a>
