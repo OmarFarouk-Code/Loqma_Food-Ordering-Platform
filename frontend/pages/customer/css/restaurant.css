@@ -486,7 +486,10 @@ input {
 .menu-search input::placeholder { color: var(--color-placeholder); }
 
 /* --- Menu --- */
-.menu-section { margin-top: var(--space-xl); }
+.menu-section {
+  margin-top: var(--space-xl);
+  scroll-margin-top: calc(var(--header-height) + var(--space-md));
+}
 .menu-section__title { font-size: 22px; line-height: 30px; font-weight: 700; color: var(--color-charcoal); }
 .menu-section__desc { font-size: 14px; line-height: 20px; color: var(--color-text-muted); }
 .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); margin-top: var(--space-md); }
@@ -647,6 +650,7 @@ input {
   .category-tab--active { border-color: var(--color-charcoal); }
 
   .menu-section, .reviews { margin-left: var(--space-md); margin-right: var(--space-md); }
+  .menu-section { scroll-margin-top: 0; }
   .menu-section__title { font-size: 16px; line-height: 24px; }
   .menu-section__desc { display: none; }
   .menu-grid { grid-template-columns: 1fr; gap: var(--space-sm); }
