@@ -14,13 +14,17 @@ import com.loqma.customer.entity.Customer;
 import com.loqma.driver.entity.Driver;
 import com.loqma.owner.entity.Restaurant;
 import com.loqma.owner.entity.RestaurantOwner;
+import com.loqma.owner.service.ImageStorageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
@@ -38,24 +42,41 @@ public class AuthService {
     private static final Pattern LICENSE = Pattern.compile("^[A-Za-z0-9][A-Za-z0-9\\-/ ]{2,48}[A-Za-z0-9]$");
 
     private static final int MAX_ADDRESSES = 5;
+    private static final long LOGO_MAX_BYTES = 2L * 1024 * 1024;
+    private static final long COVER_MAX_BYTES = 5L * 1024 * 1024;
 
     private final UserRepository userRepository;
     private final DriverLookupRepository driverLookup;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final ImageStorageService imageStorageService;
 
     public AuthService(UserRepository userRepository, DriverLookupRepository driverLookup,
                        PasswordEncoder passwordEncoder, JwtService jwtService) {
+        this(userRepository, driverLookup, passwordEncoder, jwtService, null);
+    }
+
+    @Autowired
+    public AuthService(UserRepository userRepository, DriverLookupRepository driverLookup,
+                       PasswordEncoder passwordEncoder, JwtService jwtService,
+                       ImageStorageService imageStorageService) {
         this.userRepository = userRepository;
         this.driverLookup = driverLookup;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+        this.imageStorageService = imageStorageService;
     }
 
     // ------------------------------------------------------------------ register
 
     @Transactional
     public AccountStatus register(RegisterRequest req) {
+        return register(req, null, null);
+    }
+
+    @Transactional
+    public AccountStatus register(RegisterRequest req, MultipartFile logo, MultipartFile coverImage) {
+        if (req == null) throw bad("Registration details are required");
         String name = clean(req.name());
         String email = normalizeEmail(req.email());
         String phone = clean(req.phone()).replaceAll("[\\s-]", "");
@@ -83,6 +104,20 @@ public class AuthService {
             if (driverLookup.existsByNationalId(d.getNationalId())) throw conflict("National ID already registered");
             if (driverLookup.existsByPlateNumber(d.getPlateNumber())) throw conflict("Plate number already registered");
             if (driverLookup.existsByDrivingLicense(d.getDrivingLicense())) throw conflict("Driving license already registered");
+        }
+
+        boolean hasLogo = logo != null && !logo.isEmpty();
+        boolean hasCover = coverImage != null && !coverImage.isEmpty();
+        if (hasLogo || hasCover) {
+            if (!(user instanceof RestaurantOwner owner)) {
+                throw bad("Images can only be uploaded for restaurant owner registration");
+            }
+            if (hasLogo) {
+                owner.getRestaurant().setLogo(uploadRestaurantImage(logo, LOGO_MAX_BYTES, "restaurants/logos"));
+            }
+            if (hasCover) {
+                owner.getRestaurant().setCoverImage(uploadRestaurantImage(coverImage, COVER_MAX_BYTES, "restaurants/covers"));
+            }
         }
 
         user.setName(name);
@@ -194,6 +229,9 @@ public class AuthService {
         owner.setRestaurantName(restaurantName);
         owner.setBranch(branch);
 
+        String logoUrl = clean(r.logo());
+        String coverUrl = clean(r.coverimage());
+
         Restaurant restaurant = Restaurant.builder()
                 .owner(owner)
                 .name(restaurantName)
@@ -201,6 +239,8 @@ public class AuthService {
                 .cuisine(cuisine)
                 .address(address)
                 .phone(phone.isEmpty() ? null : phone)
+                .logo(logoUrl.isEmpty() ? null : logoUrl)
+                .coverImage(coverUrl.isEmpty() ? null : coverUrl)
                 .gpsLocation(gps)
                 .deliveryFee(number(r.deliveryFee(), 0.0, 0, 1000, "Delivery fee must be between 0 and 1000"))
                 .minimumOrderAmount(number(r.minimumOrderAmount(), 0.0, 0, 10000, "Minimum order must be between 0 and 10000"))
@@ -213,6 +253,24 @@ public class AuthService {
     }
 
     // ------------------------------------------------------------------ helpers
+
+    private String uploadRestaurantImage(MultipartFile file, long maxBytes, String folder) {
+        if (file.getSize() > maxBytes) {
+            throw bad("Image exceeds maximum allowed size of " + (maxBytes / (1024 * 1024)) + " MB");
+        }
+        if (imageStorageService == null) {
+            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "Image upload service is not configured");
+        }
+        try {
+            return imageStorageService.upload(file, folder);
+        } catch (IllegalArgumentException e) {
+            throw bad(e.getMessage());
+        } catch (IllegalStateException e) {
+            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, e.getMessage());
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to upload image");
+        }
+    }
 
     /** "lat,lng" string stored in restaurants.gps_location. Required, and must be a real coordinate. */
     private String resolveGps(RegisterRequest.RestaurantRequest r) {
