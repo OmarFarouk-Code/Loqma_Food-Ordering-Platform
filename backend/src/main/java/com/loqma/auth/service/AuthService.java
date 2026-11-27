@@ -7,9 +7,12 @@ import com.loqma.auth.entity.User;
 import com.loqma.auth.repository.DriverLookupRepository;
 import com.loqma.auth.repository.UserRepository;
 import com.loqma.common.enums.AccountStatus;
+import com.loqma.common.enums.AddressLabel;
 import com.loqma.common.enums.UserRole;
+import com.loqma.customer.entity.Address;
 import com.loqma.customer.entity.Customer;
 import com.loqma.driver.entity.Driver;
+import com.loqma.owner.entity.Restaurant;
 import com.loqma.owner.entity.RestaurantOwner;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -19,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 @Service
@@ -26,6 +31,13 @@ public class AuthService {
 
     private static final Pattern EMAIL = Pattern.compile("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$");
     private static final Pattern PHONE = Pattern.compile("^\\+?[0-9]{7,15}$");
+
+    // Same rules as frontend/pages/auth/js/register.js
+    private static final Pattern NATIONAL_ID = Pattern.compile("^\\d{14}$");
+    private static final Pattern PLATE = Pattern.compile("^[\\p{L}\\p{N}][\\p{L}\\p{N} -]{1,18}[\\p{L}\\p{N}]$");
+    private static final Pattern LICENSE = Pattern.compile("^[A-Za-z0-9][A-Za-z0-9\\-/ ]{2,48}[A-Za-z0-9]$");
+
+    private static final int MAX_ADDRESSES = 5;
 
     private final UserRepository userRepository;
     private final DriverLookupRepository driverLookup;
@@ -40,10 +52,12 @@ public class AuthService {
         this.jwtService = jwtService;
     }
 
+    // ------------------------------------------------------------------ register
+
     @Transactional
     public AccountStatus register(RegisterRequest req) {
         String name = clean(req.name());
-        String email = clean(req.email());
+        String email = normalizeEmail(req.email());
         String phone = clean(req.phone()).replaceAll("[\\s-]", "");
         String password = req.password() == null ? "" : req.password();
         UserRole role = req.role();
@@ -60,7 +74,7 @@ public class AuthService {
         User user = switch (role) {
             case DRIVER -> buildDriver(req.driver());
             case RESTAURANT_OWNER -> buildOwner(req.restaurant());
-            default -> new Customer();
+            default -> buildCustomer(req.addresses());
         };
 
         if (userRepository.existsByEmail(email)) throw conflict("Email already in use");
@@ -79,6 +93,8 @@ public class AuthService {
         user.setStatus(role == UserRole.CUSTOMER ? AccountStatus.ACTIVE : AccountStatus.PENDING_APPROVAL);
 
         try {
+            // Saves the users row plus the matching customers / drivers / restaurant_owners row,
+            // and (through cascade) the customer's addresses or the owner's restaurant.
             userRepository.saveAndFlush(user);
         } catch (DataIntegrityViolationException e) {
             throw conflict("An account with these details already exists");
@@ -86,10 +102,12 @@ public class AuthService {
         return user.getStatus();
     }
 
+    // ------------------------------------------------------------------ login
+
     public LoginResponse login(LoginRequest req) {
         if (req.email() == null || req.password() == null) throw invalidCredentials();
 
-        User user = userRepository.findByEmail(req.email().trim())
+        User user = userRepository.findByEmail(normalizeEmail(req.email()))
                 .orElseThrow(this::invalidCredentials);
 
         if (!passwordEncoder.matches(req.password(), user.getPassword())) throw invalidCredentials();
@@ -106,14 +124,48 @@ public class AuthService {
         return new LoginResponse(jwtService.generateToken(user), user.getRole().name());
     }
 
+    // ------------------------------------------------------------------ builders
+
+    private Customer buildCustomer(List<RegisterRequest.AddressRequest> addresses) {
+        if (addresses == null || addresses.isEmpty()) throw bad("At least one delivery address is required");
+        if (addresses.size() > MAX_ADDRESSES) throw bad("You can add up to " + MAX_ADDRESSES + " addresses");
+
+        Customer customer = new Customer();
+        boolean first = true;
+        for (RegisterRequest.AddressRequest a : addresses) {
+            if (a == null) throw bad("Address details are required");
+            String nickname = clean(a.nickname());
+            String street = clean(a.street());
+            String building = clean(a.building());
+            if (nickname.isEmpty()) throw bad("Address nickname is required");
+            if (street.isEmpty() || street.length() > 150) throw bad("Street name is required (max 150 characters)");
+            if (building.isEmpty() || building.length() > 100) throw bad("Building details are required (max 100 characters)");
+
+            customer.getAddresses().add(Address.builder()
+                    .customer(customer)
+                    .label(toLabel(nickname))
+                    .street(street)
+                    .building(building)
+                    .isDefault(first)          // first address is the default one
+                    .build());
+            first = false;
+        }
+        return customer;
+    }
+
     private Driver buildDriver(RegisterRequest.DriverRequest d) {
         if (d == null) throw bad("Driver details are required");
-        String nid = clean(d.nationalId());
-        String plate = clean(d.plateNumber());
-        String lic = clean(d.drivingLicense());
-        if (nid.isEmpty() || nid.length() > 30) throw bad("National ID is required (max 30 characters)");
-        if (plate.isEmpty() || plate.length() > 20) throw bad("Plate number is required (max 20 characters)");
-        if (lic.isEmpty() || lic.length() > 50) throw bad("Driving license is required (max 50 characters)");
+        // Normalised the same way the frontend does, so duplicate checks work for direct API calls too
+        String nid = clean(d.nationalId()).replaceAll("\\s", "");
+        String plate = clean(d.plateNumber()).replaceAll("\\s+", " ").toUpperCase(Locale.ROOT);
+        String lic = clean(d.drivingLicense()).replaceAll("\\s+", " ").toUpperCase(Locale.ROOT);
+
+        if (!NATIONAL_ID.matcher(nid).matches()) throw bad("National ID must be 14 digits");
+        if (plate.length() > 20 || !PLATE.matcher(plate).matches() || !plate.matches(".*\\d.*")) {
+            throw bad("Invalid plate number");
+        }
+        if (lic.length() > 50 || !LICENSE.matcher(lic).matches()) throw bad("Invalid driving license number");
+
         Driver driver = new Driver();
         driver.setNationalId(nid);
         driver.setPlateNumber(plate);
@@ -123,15 +175,86 @@ public class AuthService {
 
     private RestaurantOwner buildOwner(RegisterRequest.RestaurantRequest r) {
         if (r == null) throw bad("Restaurant details are required");
+
         String restaurantName = clean(r.name());
         String branch = clean(r.branch());
+        String cuisine = clean(r.cuisine());
+        String address = clean(r.address());
+        String phone = clean(r.phone()).replaceAll("[\\s-]", "");
+
         if (restaurantName.isEmpty() || restaurantName.length() > 100) throw bad("Restaurant name is required (max 100 characters)");
         if (branch.isEmpty() || branch.length() > 100) throw bad("Branch is required (max 100 characters)");
+        if (cuisine.isEmpty() || cuisine.length() > 100) throw bad("Cuisine is required (max 100 characters)");
+        if (address.isEmpty() || address.length() > 255) throw bad("Restaurant address is required (max 255 characters)");
+        if (!phone.isEmpty() && !PHONE.matcher(phone).matches()) throw bad("Invalid restaurant phone number");
+
+        String gps = resolveGps(r);
+
         RestaurantOwner owner = new RestaurantOwner();
         owner.setRestaurantName(restaurantName);
         owner.setBranch(branch);
+
+        Restaurant restaurant = Restaurant.builder()
+                .owner(owner)
+                .name(restaurantName)
+                .branch(branch)
+                .cuisine(cuisine)
+                .address(address)
+                .phone(phone.isEmpty() ? null : phone)
+                .gpsLocation(gps)
+                .deliveryFee(number(r.deliveryFee(), 0.0, 0, 1000, "Delivery fee must be between 0 and 1000"))
+                .minimumOrderAmount(number(r.minimumOrderAmount(), 0.0, 0, 10000, "Minimum order must be between 0 and 10000"))
+                .prepTime(number(r.prepTime(), 25.0, 1, 240, "Preparation time must be between 1 and 240 minutes"))
+                .maxDeliveryDistance(number(r.maxDeliveryDistance(), 15.0, 1, 100, "Max delivery distance must be between 1 and 100 km"))
+                .build();
+
+        owner.setRestaurant(restaurant);   // cascade = ALL on the owner saves the restaurants row too
         return owner;
     }
+
+    // ------------------------------------------------------------------ helpers
+
+    /** "lat,lng" string stored in restaurants.gps_location. Required, and must be a real coordinate. */
+    private String resolveGps(RegisterRequest.RestaurantRequest r) {
+        Double lat = r.latitude();
+        Double lng = r.longitude();
+
+        if (lat == null || lng == null) {
+            // fall back to the "lat,lng" string the frontend also sends
+            String raw = clean(r.gpsLocation());
+            String[] parts = raw.split(",");
+            if (parts.length != 2) throw bad("Restaurant location is required");
+            try {
+                lat = Double.parseDouble(parts[0].trim());
+                lng = Double.parseDouble(parts[1].trim());
+            } catch (NumberFormatException e) {
+                throw bad("Restaurant location is invalid");
+            }
+        }
+        if (!Double.isFinite(lat) || !Double.isFinite(lng)
+                || lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+            throw bad("Restaurant location is invalid");
+        }
+        return String.format(Locale.ROOT, "%.6f,%.6f", lat, lng);
+    }
+
+    /** Null -> default; otherwise must be a finite number inside [min, max]. */
+    private double number(Double value, double defaultValue, double min, double max, String message) {
+        if (value == null) return defaultValue;
+        if (!Double.isFinite(value) || value < min || value > max) throw bad(message);
+        return value;
+    }
+
+    /** Frontend lets people type any nickname; the database only knows HOME / WORK / GYM / OTHER. */
+    private AddressLabel toLabel(String nickname) {
+        try {
+            return AddressLabel.valueOf(nickname.trim().toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException e) {
+            return AddressLabel.OTHER;
+        }
+    }
+
+    private String normalizeEmail(String s) { return clean(s).toLowerCase(Locale.ROOT); }
 
     private String clean(String s) { return s == null ? "" : s.trim(); }
 
@@ -144,5 +267,11 @@ public class AuthService {
     private ResponseStatusException forbidden(String m) { return new ResponseStatusException(HttpStatus.FORBIDDEN, m); }
     private ResponseStatusException invalidCredentials() {
         return new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
+    }
+    public java.util.Map<String, String> me(String userId) {
+        User u = userRepository.findById(userId)
+                .orElseThrow(this::invalidCredentials);
+        return java.util.Map.of("name", u.getName(), "email", u.getEmail(),
+                "role", u.getRole().name(), "status", u.getStatus().name());
     }
 }

@@ -12,10 +12,10 @@ public record RegisterRequest(
 
     public record AddressRequest(String nickname, String street, String building) {}
 
-    public record DriverRequest(String nationalId, String plateNumber, String drivingLicense) {}
+    public record DriverRequest(String name,String phonenumber,String email,String nationalId, String plateNumber, String drivingLicense) {}
 
-    public record RestaurantRequest(String name, String branch, String cuisine, String address, String phone,
+    public record RestaurantRequest(String name, String email,String branch, String cuisine, String address, String phone,
                                     String gpsLocation, Double latitude, Double longitude,
                                     Double deliveryFee, Double minimumOrderAmount,
-                                    Double prepTime, Double maxDeliveryDistance) {}
+                                    Double prepTime, Double maxDeliveryDistance,String logo,String coverimage) {}
 }

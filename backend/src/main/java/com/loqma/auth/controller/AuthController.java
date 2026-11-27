@@ -8,7 +8,7 @@ import com.loqma.common.enums.AccountStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.core.Authentication;
 import java.util.Map;
 
 @RestController
@@ -34,5 +34,9 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
+    }
+    @GetMapping("/me")
+    public ResponseEntity<Map<String, String>> me(Authentication auth) {
+        return ResponseEntity.ok(authService.me(String.valueOf(auth.getPrincipal())));
     }
 }

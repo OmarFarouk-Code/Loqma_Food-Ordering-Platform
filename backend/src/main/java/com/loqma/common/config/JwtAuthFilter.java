@@ -1,6 +1,9 @@
 package com.loqma.common.config;
 
+import com.loqma.auth.entity.User;
+import com.loqma.auth.repository.UserRepository;
 import com.loqma.auth.service.JwtService;
+import com.loqma.common.enums.AccountStatus;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -20,9 +23,11 @@ import java.util.List;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
+    private final UserRepository userRepository;
 
-    public JwtAuthFilter(JwtService jwtService) {
+    public JwtAuthFilter(JwtService jwtService, UserRepository userRepository) {
         this.jwtService = jwtService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -32,12 +37,15 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith("Bearer ")) {
             try {
                 Claims claims = jwtService.parseToken(header.substring(7));
-                String role = claims.get("role", String.class);
-                var auth = new UsernamePasswordAuthenticationToken(
-                        claims.getSubject(), null, List.of(new SimpleGrantedAuthority("ROLE_" + role)));
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                User user = userRepository.findById(claims.getSubject()).orElse(null);
+                if (user != null && user.getStatus() == AccountStatus.ACTIVE) {
+                    var auth = new UsernamePasswordAuthenticationToken(
+                            user.getId(), null,
+                            List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name())));
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
             } catch (JwtException | IllegalArgumentException e) {
-                // bad or expired token: the request simply stays "not logged in"
+                // bad or expired token: the request stays "not logged in"
             }
         }
         chain.doFilter(request, response);
