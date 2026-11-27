@@ -1,0 +1,28 @@
+.promo-kicker { font-size: .7rem; letter-spacing: .05em; color: #6c757d; text-transform: uppercase; }
+    .promo-kicker .sync { color: #198754; text-transform: none; }
+    .promo-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; }
+    .stat-pill { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: .5rem .9rem; min-width: 130px; }
+    .stat-pill .label { font-size: .7rem; color: #6c757d; }
+    .stat-pill .value { font-size: 1.25rem; font-weight: 700; line-height: 1.1; }
+    .code-chip { display: inline-block; background: #f1f1f1; border-radius: 4px; padding: .15rem .5rem; font-weight: 700; font-size: .85rem; font-family: ui-monospace, Menlo, monospace; }
+    .promo-table th { font-size: .68rem; letter-spacing: .05em; color: #6c757d; background: #f5f5f5; font-weight: 600; }
+    .promo-table td { vertical-align: middle; font-size: .82rem; }
+    .st { font-size: .72rem; display: inline-flex; align-items: center; gap: .3rem; }
+    .st::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .st-active { color: #198754; }
+    .st-scheduled { color: #b45309; }
+    .badge-active { background: #d1f2df; color: #146c43; font-weight: 600; font-size: .65rem; }
+    .badge-sched { background: #fde8c8; color: #9a5b0b; font-weight: 600; font-size: .65rem; }
+    .btn-loqma { background: #e11d2e; border-color: #e11d2e; color: #fff; border-radius: 999px; font-weight: 600; }
+    .btn-loqma:hover { background: #c4101f; border-color: #c4101f; color: #fff; }
+    .form-control-filled { background: #f1f1f1; border: 1px solid #e5e5e5; }
+    .note-box { background: #f5f5f5; border: 1px solid #e5e7eb; border-radius: 8px; font-size: .75rem; color: #495057; padding: .6rem .75rem; }
+    .err-text { color: #dc3545; font-size: .72rem; }
+    .immut { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; font-size: .8rem; }
+    .promo-mcard { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: .9rem; }
+    .promo-mcard .lock { background: #f1f1f1; border-radius: 6px; font-size: .72rem; color: #495057; padding: .35rem .5rem; }
+    .promo-mcard .ok { background: #dff5e7; border-radius: 6px; font-size: .72rem; color: #146c43; padding: .35rem .5rem; }
+    .promo-tabs { border-bottom: 1px solid #dee2e6; }
+    .promo-tabs button { flex: 1; background: none; border: 0; border-bottom: 2px solid transparent; padding: .6rem; font-weight: 600; color: #6c757d; }
+    .promo-tabs button.on { color: #e11d2e; border-bottom-color: #e11d2e; }
+    @media (min-width: 992px) { .create-col { width: 340px; flex: none; } }
