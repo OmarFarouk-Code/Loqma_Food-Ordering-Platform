@@ -6,6 +6,7 @@ import com.loqma.common.enums.AccountStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,6 +20,14 @@ public class AdminController {
     }
 
     public record RejectRequest(String reason) {}
+
+    @GetMapping("/pending")
+    public List<Map<String, String>> pending() {
+        return userRepository.findByStatus(AccountStatus.PENDING_APPROVAL).stream()
+                .map(u -> Map.of("id", u.getId(), "name", u.getName(),
+                        "email", u.getEmail(), "role", u.getRole().name()))
+                .toList();
+    }
 
     @PatchMapping("/{id}/approve")
     public ResponseEntity<Map<String, String>> approve(@PathVariable String id) {

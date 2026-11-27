@@ -37,11 +37,11 @@ public class AdminSeeder implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         if (email.isBlank() || password.isBlank()) {
-            return; // nothing configured, so no admin is created
+            return;
         }
         String normalized = email.trim().toLowerCase(Locale.ROOT);
         if (userRepository.findByEmail(normalized).isPresent()) {
-            return; // already seeded
+            return;
         }
         Admin admin = new Admin();
         admin.setName("Admin");
