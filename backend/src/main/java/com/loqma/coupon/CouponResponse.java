@@ -1,5 +1,6 @@
 package com.loqma.coupon;
 
+import com.loqma.admin.entity.Coupon;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
