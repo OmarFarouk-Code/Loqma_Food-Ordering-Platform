@@ -17,12 +17,12 @@ const restaurantURL = `http://127.0.0.1:8080/api/customer/restaurants`;
 const menuURL = `http://127.0.0.1:8080/api/restaurants`;
 
 
-async function loadMenuItems(/*restaurantId*/) {
+async function loadMenuItems(restaurantId) {
     const categoryTabs = document.getElementById("category-tabs");
     const menuSections = document.getElementById("menu-sections");
     menuSections.innerHTML = ""; // TODO: include failed to load menu message if GET fails
 
-    const response = await fetch(menuURL/*+`/${restaurantId}/menu`*/, {
+    const response = await fetch(menuURL+`/${restaurantId}/menu`, {
         method: "GET",
         headers: { "Content-Type": "application/json"}
     });
@@ -67,8 +67,8 @@ async function loadMenuItems(/*restaurantId*/) {
 }
 
 
-async function loadReviews(/*resaurantId*/) {
-    const response = await fetch(restaurantURL+/*`/restaurantId*/`/reviews`, {
+async function loadReviews(resaurantId) {
+    const response = await fetch(restaurantURL+`/${restaurantId}/reviews`, {
         method: "GET",
         headers: { "Content-Type": "application/json"}
     });
