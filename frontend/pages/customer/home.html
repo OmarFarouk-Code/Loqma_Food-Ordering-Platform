@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loqma Homepage</title>
+
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Loqma styles -->
+    <link href="css/home.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- HEADERRRRR -->
+    <header class="site-header">
+      <div class="page-container site-header__inner d-flex align-items-center justify-content-between">
+        <!-- Logo + main navigation -->
+        <div class="site-header__left d-flex align-items-center flex-shrink-0">
+          <a class="brand-logo" href="#">Loqma</a>
+
+          <nav class="main-nav d-none d-md-flex align-items-center">
+            <a class="main-nav__link main-nav__link--active" aria-current="page" href="#">Home</a>
+            <a class="main-nav__link" href="#">Orders</a>
+            <a class="main-nav__link" href="#">Promotions</a>
+          </nav>
+        </div>
+
+        <!-- Search -->
+        <div class="header-search d-none d-md-flex align-items-center">
+          <div class="header-search__box d-flex align-items-center">
+            <span class="material-symbols-outlined header-search__icon">search</span>
+            <input class="header-search__input" type="text" placeholder="Search restaurants or dishes" />
+          </div>
+        </div>
+
+        <!-- Notifications, cart and user menu -->
+        <div class="header-actions d-flex align-items-center flex-shrink-0">
+          <button class="icon-button" type="button" aria-label="Notifications">
+            <span class="material-symbols-outlined icon-24">notifications</span>
+            <span class="icon-button__badge">3</span>
+          </button>
+
+          <button class="icon-button" type="button" aria-label="Shopping Cart">
+            <span class="material-symbols-outlined icon-24">shopping_bag</span>
+            <span class="icon-button__badge">2</span>
+          </button>
+
+          <div class="user-menu d-flex align-items-center">
+            <div class="user-menu__avatar">
+              <span class="material-symbols-outlined icon-18">person</span>
+            </div>
+            <span class="user-menu__name d-none d-lg-inline-block">Omar Aly</span>
+            <span class="material-symbols-outlined user-menu__arrow">expand_more</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    // MAIN CONTENT
+    <main class="page-content">
+      <!-- ---------- Hero: red search band ---------- -->
+      <div class="page-container hero-wrapper">
+        <div class="hero">
+          <div class="hero__top d-flex flex-column flex-md-row align-items-md-end justify-content-between">
+            <h1 class="hero__title">Skip the cooking, we've got your back.</h1>
+
+            <div class="search-tabs d-flex align-items-center">
+              <button class="search-tabs__tab search-tabs__tab--active" id="tab-restaurants" type="button">Restaurants</button>
+              <button class="search-tabs__tab" id="tab-dishes" type="button">Dishes</button>
+            </div>
+          </div>
+
+          <div class="hero-search">
+            <div class="hero-search__box d-flex align-items-center">
+              <span class="material-symbols-outlined hero-search__icon">search</span>
+              <input class="hero-search__input" id="main-search-input" type="text" placeholder="Search restaurants" />
+              <button class="hero-search__submit" type="button" aria-label="Submit search">
+                <span class="material-symbols-outlined icon-20">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------- Cuisine shortcuts ---------- -->
+      <div class="page-container cuisine-bar-wrapper">
+        <div class="cuisine-bar d-flex align-items-center justify-content-between">
+          <a class="cuisine-item" href="restaurant-list.html?cuisine=Burgers">
+            <div class="cuisine-item__image-box">
+              <img
+                class="cuisine-item__image"
+                alt="Gourmet smash burger with melted cheddar cheese, crisp lettuce, red tomato slices, and caramelized onion jam on a glossy brioche bun."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUYVZoVCuOf4J2YepdDkcogBKV6x4n65kPkZ0zpG3vS69aTqyCif5cGy3V2tmqw6vQNhSLZzdQc9CoXEyZy6_aIcEUNil64Xb4bAQ-aDOsXuieVwCR1FHxcxVzSqlgPIDEenKaLxqCaDNnWTesdYM3Rckwe7cOEELYNLeSkCb18lp9SDFPagLscshH8yJfoxkRZE4_-w-XaEgHw5LrrceaXnKRaREyHrSEjlUIBB0K"
+              />
+            </div>
+            <span class="cuisine-item__label">Burgers</span>
+          </a>
+
+          <a class="cuisine-item" href="restaurant-list.html?cuisine=Pizza">
+            <div class="cuisine-item__image-box">
+              <img
+                class="cuisine-item__image"
+                alt="Neapolitan artisan pizza with blistered crust, fresh mozzarella, basil leaves and tomato sauce."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEWf_nFWfCbSaeejCsEiUH8NgxfsUx1hv3SIRHkhnG-YdT--tfQT95kxaBu46KHCyaRrgYCsRnZsRcU0bavWSS1vG2BBMRSe7-j8BFdzMUsfRZVdvP5koQRhCFAy9mYvDySlRcqgd9apuXsMzzQz98R09y2TPbqaCmYvb4s4rr91LA3FSB8KnehsOxqtGTXNvPdeQbHZdPOmNWzCtMDPbiredvRy-mG2AGgXisHG9T"
+              />
+            </div>
+            <span class="cuisine-item__label">Pizza</span>
+          </a>
+
+          <a class="cuisine-item" href="restaurant-list.html?cuisine=Chicken">
+            <div class="cuisine-item__image-box">
+              <img
+                class="cuisine-item__image"
+                alt="Golden crispy fried chicken tenders on a rustic board."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvH6ZBWNMsrKf1OCu8FYvAyGS1i7MgWnIoN46P7zogWY1JF-62mO16CqOijrCyKQdr1HQ_sL6hLdXDI1_kergKTG0-qP4qenVXlgUm_TDuzDl-LwiNfMFBir6v-7QaaTXJHEVqUiQeEw4MPW8TCO6CoITjm-tV1nEenW9Q0wPCHXzSo6_MgQiSRneiIoNYNaXiz3MAOS_8engOZJVZK5X54tjsSe5xPNDbfhYqVzEg"
+              />
+            </div>
+            <span class="cuisine-item__label">Chicken</span>
+          </a>
+
+          <a class="cuisine-item" href="restaurant-list.html?cuisine=Seafood">
+            <div class="cuisine-item__image-box">
+              <img
+                class="cuisine-item__image"
+                alt="Grilled tiger prawns with garlic butter, lemon slice and chopped parsley on a ceramic platter."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1_2uCI8GWZF67gQ8NRiYMLDSli8-oKVLIGC25EEjE9ZlhXAa1No-cVbDwrDh__4iOJfqShOgc3mQimQ1AJs5SbcsdYMty9xlW43owcrlRjenEjbjW61I_ye6cVb0uIBA2VM_w-u8-aWhyrNbQGF33dYlGczXbgDC1X7g5tbDg6ZwVnGCqqDkjOqnA-RwMmzMQS7dYVVm_8-vnysehjLItD_SdXJiNc14B9DK5OIH4"
+              />
+            </div>
+            <span class="cuisine-item__label">Seafood</span>
+          </a>
+
+          <a class="cuisine-item" href="restaurant-list.html?cuisine=Asian">
+            <div class="cuisine-item__image-box">
+              <img
+                class="cuisine-item__image"
+                alt="Steaming bowl of ramen with chashu pork, nori and a soft boiled egg."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVEGfw_3IVvYK6ZSDEYzALmirjHF17Wc2KAzGCiemzKwVC-tm9IIVJvS_yr92NXoQRxWXsJB1TALh8FvK9IMmkVvKcrTMWb3EI8uPYVBkEZ_TG-0jZnhbnLnFhYTLP2irch0FnXdRQTqgNwCYLSukp99kOR6o-DiSZc-JdxEfX5NYEmXvy74Bms9qK5V10No9xNVsguqceiwK3O7FzEvaOXXWGMyLBjwMqkCvuJF5e"
+              />
+            </div>
+            <span class="cuisine-item__label">Asian</span>
+          </a>
+
+          <a class="cuisine-item" href="restaurant-list.html?cuisine=Italian">
+            <div class="cuisine-item__image-box">
+              <img
+                class="cuisine-item__image"
+                alt="Tagliatelle pasta in truffled mushroom sauce topped with shaved parmigiano."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjIUqUZS3Zq5lscoe6rABtS-Z_OvF-CHLunE9E_6tBo7oOHKQngBsD3axCQ3hFtb8kcBWT0F1qo-E83jJiGDA40Bd4LvVe7KoPUxQXOc4BvQC1nD16mgmucQlevcg-gSXNQGZGpY-KiNghr1qfZ5PlcY2-yorWxjtcqy3-vthIJKb0OnfwzS2XL6aV5Oqftb70Wmn9u4sAMSxRQXLjm4rr-0Rx8idq6MEz1yoKCKUn"
+              />
+            </div>
+            <span class="cuisine-item__label">Italian</span>
+          </a>
+
+          <a class="cuisine-item" href="restaurant-list.html?cuisine=Oriental">
+            <div class="cuisine-item__image-box">
+              <img
+                class="cuisine-item__image"
+                alt="Charcoal-grilled shish kebab skewers with sumac onions, peppers and warm flatbread."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrzGkdwFRNYxTVl-gaQkFCOwP2Jx_eqeTq-6uL3TJKmUIsllO3FieFD0c4gzGaX5KoKH_IQb_pJ2GxxlfeM8jcuz9oUBzM_jtyFTsSoJ6wpRU2hzs9t88SxIaaixpvxKc4tivLER4edGMYhc0ABCAD1jP873JrmkVj7zbvNPj5YBNZRhNfByFQmlJwWWDYFN5xcizcNlxl_D37qk-C_hgAxG_-WG5E7Z235GEOyED_"
+              />
+            </div>
+            <span class="cuisine-item__label">Oriental</span>
+          </a>
+
+          <a class="cuisine-item" href="restaurant-list.html?cuisine=Desserts">
+            <div class="cuisine-item__image-box">
+              <img
+                class="cuisine-item__image"
+                alt="Golden kunafa pastry with cream, syrup and crushed pistachios."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHe_JdCtj8yVhs6lzdZ7wTz-5C1rgKys8bsRFrbhOTSxlfSdapH9PaXyiDWhL0qPdjxInj3HSY8qLE_XZ-yXdirvRiFy_iWaw1JnIOE5enPnIeWoosTCL-g_SWp_tYaDMlTZvO1YEEQp7HsGmSHqVqvO6mW96SiKWcYObvAl-7Dsa4mvuo3x7ig2T6xp3k-hY0u2C1ZSrfUa7Ep1MtliR_s-Vycxj5E2yCxfj_qCRS"
+              />
+            </div>
+            <span class="cuisine-item__label">Desserts</span>
+          </a>
+
+          <a class="cuisine-item" href="restaurant-list.html?cuisine=Healthy">
+            <div class="cuisine-item__image-box">
+              <img
+                class="cuisine-item__image"
+                alt="Quinoa salad bowl with roasted sweet potato, avocado, edamame and tahini."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt4x3CQP8v2qh3-tJO64cnqaX-zwr4zTWITpPBXoqqIfcaVoOwKB4Wgp5tajq34Hu2h_z1Q48rU3-nfk2ipi_aU4re7vj1KZDsDWxTJBUuaI3RqwqV2kyHD_sEZA3IdqKDd98aJzXWW09soNQaICKvM3EGDMiLGow4KbGVY5eHwq1eHfx3p02nwtncvsBTV20TpDMhhcQwqGKl0nMwZipIXDkJc34lnafncRtzGFvY"
+              />
+            </div>
+            <span class="cuisine-item__label">Healthy</span>
+          </a>
+
+          <a class="cuisine-item" href="restaurant-list.html?cuisine=Drinks">
+            <div class="cuisine-item__image-box">
+              <img
+                class="cuisine-item__image"
+                alt="Iced ruby red hibiscus and citrus juice in a tall glass with fresh mint."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4UxgIh8C_e-eIQDl7KW5GpADtLo8tZ56eHupfpS0kWMkfDB_XU_hCw9yt2JgG13A1xuIf-m3U7v0-G0NOjBibbhyWyg8XKtBD9eUaQUCP_vlhXZxmjsBaUcYHrQvHbElPN5FhXH7_VH6Zq9HsLtpxGrgu3Br57cjIBXP_BCPk6jp6VC6FQvnzM5G3zoz1krz0PIRwDCm-Sh55BwML4TY1VbkOCo5TreDIJhlO_yDT"
+              />
+            </div>
+            <span class="cuisine-item__label">Drinks</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ---------- Featured restaurants ---------- -->
+      <section class="page-container restaurant-section">
+        <div class="section-heading d-flex align-items-center justify-content-between">
+          <h2 class="section-heading__title">Featured restaurants</h2>
+          <a class="section-heading__link" href="restaurant-list.html">View all</a>
+        </div>
+
+        <!-- Populated dynamically by restaurants.js -->
+        <div class="row g-4" id="featured-restaurants-grid"></div>
+      </section>
+
+      <!-- ---------- Popular near you ---------- -->
+      <section class="page-container restaurant-section">
+        <div class="section-heading d-flex align-items-center justify-content-between">
+          <h2 class="section-heading__title">Popular near you</h2>
+          <a class="section-heading__link" href="restaurant-list.html">View all</a>
+        </div>
+
+        <!-- Populated dynamically by restaurants.js -->
+        <div class="row g-4" id="popular-restaurants-grid"></div>
+      </section>
+
+      <!-- ---------- Active order banner ----------
+      <div class="page-container order-banner-wrapper">
+        <a class="order-banner" href="#">
+          <div class="order-banner__status d-flex align-items-center">
+            <div class="order-banner__dot"></div>
+            <p class="order-banner__text">Preparing your food, #LQ-10234 · Estimated arrival in 18 min</p>
+          </div>
+          <div class="order-banner__action d-flex align-items-center">
+            <span class="order-banner__action-text">Track order</span>
+            <span class="material-symbols-outlined icon-20">chevron_right</span>
+          </div>
+        </a>
+      </div> -->
+    </main>
+
+    <!--SITE FOOTER -->
+    <footer class="site-footer">
+      <div class="page-container site-footer__inner d-flex flex-wrap align-items-center justify-content-center">
+        <a class="site-footer__link" href="#">Help</a>
+        <span>•</span>
+        <a class="site-footer__link" href="#">About Loqma</a>
+        <span>•</span>
+        <a class="site-footer__link" href="#">Terms</a>
+        <span>•</span>
+        <a class="site-footer__link" href="#">Privacy</a>
+        <span>•</span>
+        <span>© 2026 Loqma</span>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="js/restaurants.js"></script>
+    <script src="js/home.js"></script>
+  </body>
+</html>

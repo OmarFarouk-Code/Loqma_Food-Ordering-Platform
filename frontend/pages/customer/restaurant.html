@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Restaurant – Loqma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Loqma styles -->
+  <link href="css/restaurant.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Desktop header (same markup as home page) -->
+  <header class="site-header">
+    <div class="site-header__inner page-container">
+      <div class="site-header__left">
+        <a href="/" class="brand-logo">Loqma</a>
+        <nav class="main-nav">
+          <a href="/" class="main-nav__link">Home</a>
+          <a href="/orders" class="main-nav__link">Orders</a>
+          <a href="/promotions" class="main-nav__link">Promotions</a>
+        </nav>
+      </div>
+      <form class="header-search" role="search" onsubmit="return false">
+        <label class="header-search__box">
+          <span class="material-symbols-outlined header-search__icon">search</span>
+          <input type="search" id="search-input" class="header-search__input" placeholder="Search restaurants or dishes">
+        </label>
+      </form>
+      <div class="header-actions">
+        <a href="/notifications" class="icon-button" aria-label="Notifications">
+          <span class="material-symbols-outlined icon-24">notifications</span>
+          <span class="icon-button__badge" id="notification-badge">3</span>
+        </a>
+        <a href="/cart" class="icon-button" aria-label="Cart">
+          <span class="material-symbols-outlined icon-24">shopping_bag</span>
+          <span class="icon-button__badge" id="cart-badge">2</span>
+        </a>
+        <div class="user-menu">
+          <span class="user-menu__avatar" id="user-avatar"><span class="material-symbols-outlined icon-20">person</span></span>
+          <span class="user-menu__name" id="user-name">Omar Aly</span>
+          <span class="material-symbols-outlined user-menu__arrow">keyboard_arrow_down</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile header + sub bar -->
+  <header class="mobile-header">
+    <a href="/" class="brand-logo">Loqma</a>
+    <div class="header-actions">
+      <a href="/cart" class="icon-button" aria-label="Cart"><span class="material-symbols-outlined icon-24">shopping_bag</span><span class="icon-button__badge" id="mobile-cart-badge">2</span></a>
+      <a href="/notifications" class="icon-button" aria-label="Notifications"><span class="material-symbols-outlined icon-24">notifications</span><span class="icon-button__badge" id="mobile-notification-badge">3</span></a>
+      <span class="user-menu__avatar" id="mobile-user-avatar"><span class="material-symbols-outlined icon-20">person</span></span>
+    </div>
+  </header>
+  <div class="mobile-subbar">
+    <a href="javascript:history.back()" class="round-button" id="mobile-back-link" aria-label="Back"><span class="material-symbols-outlined icon-20">arrow_back</span></a>
+    <span class="mobile-subbar__title" id="mobile-restaurant-name">Zahra Grill</span>
+    <div class="mobile-subbar__actions">
+      <button type="button" class="round-button" id="favorite-btn" aria-label="Favorite"><span class="material-symbols-outlined icon-20">favorite</span></button>
+      <a href="/cart" class="round-button" aria-label="Cart"><span class="material-symbols-outlined icon-20">shopping_bag</span><span class="icon-button__badge" id="subbar-cart-badge">2</span></a>
+    </div>
+  </div>
+
+  <main class="page-content restaurant-page">
+    <div class="page-container">
+
+      <!-- Cover + info -->
+      <div class="cover"><img class="cover__image" id="restaurant-cover" alt=""></div>
+
+      <section class="restaurant-info">
+        <span class="restaurant-info__logo" id="restaurant-logo"><span class="material-symbols-outlined icon-24">outdoor_grill</span></span>
+
+        <div class="restaurant-info__top">
+          <div>
+            <div class="restaurant-info__name-row">
+              <h1 class="restaurant-info__name" id="restaurant-name">Zahra Grill</h1>
+              <span class="status-badge" id="restaurant-status">Open now · Closes 11:00 PM</span>
+            </div>
+            <div class="restaurant-info__line">
+              <span class="restaurant-info__rating"><span class="material-symbols-outlined icon-18">star</span><span id="restaurant-rating">4.6</span></span>
+              <span class="restaurant-info__reviews">(<span id="restaurant-reviews-count">320</span> reviews)</span>
+              <span class="dot">•</span><span id="restaurant-address">Street 90, New Cairo</span><span class="dot">•</span>
+            </div>
+            <div class="restaurant-info__line"><span id="restaurant-phone">0100 123 4567</span></div>
+            <div class="restaurant-info__stats">
+              <span class="restaurant-info__stat"><span class="material-symbols-outlined icon-14">schedule</span><span id="restaurant-delivery-time">25-35 min</span></span>
+              <span class="restaurant-info__stat"><span class="material-symbols-outlined icon-14">pedal_bike</span><span id="restaurant-delivery-fee">EGP 25 delivery</span></span>
+              <span class="restaurant-info__stat"><span class="material-symbols-outlined icon-14">shopping_bag</span><span id="restaurant-min-order">Min EGP 100</span></span>
+            </div>
+          </div>
+          <div class="promo" id="promo-box"><span class="material-symbols-outlined icon-18">sell</span><span id="promo-text">EGP 30 off orders over EGP 250</span></div>
+        </div>
+
+        <div class="menu-toolbar">
+          <nav class="category-tabs" id="category-tabs" aria-label="Menu categories"></nav>
+          <label class="menu-search">
+            <span class="material-symbols-outlined icon-18">search</span>
+            <input type="search" id="menu-search" placeholder="Search this menu">
+          </label>
+        </div>
+      </section>
+
+      <!-- Menu: repeat sections / cards, ids indexed -->
+      <div id="menu-sections">
+      </div>
+
+      <!-- Reviews -->
+      <section class="reviews" id="reviews">
+        <div class="reviews__summary">
+          <div>
+            <h2 class="reviews__title">Customer reviews</h2>
+            <div class="reviews__score">
+              <span class="reviews__average" id="reviews-average">0</span>
+              <div>
+                <span class="stars stars--lg" id="reviews-stars" style="--rating:0" aria-label="0 out of 5"></span>
+                <p class="reviews__meta">Based on <span id="reviews-total">0</span> verified reviews</p>
+              </div>
+            </div>
+          </div>
+          <div class="distribution" id="rating-distribution">
+            <div class="distribution__row"><span class="distribution__label">5★</span><span class="distribution__track"><span class="distribution__bar" id="rating-5-bar" style="width:0%"></span></span><span class="distribution__percent" id="rating-5-percent">0%</span></div>
+            <div class="distribution__row"><span class="distribution__label">4★</span><span class="distribution__track"><span class="distribution__bar" id="rating-4-bar" style="width:0%"></span></span><span class="distribution__percent" id="rating-4-percent">0%</span></div>
+            <div class="distribution__row"><span class="distribution__label">3★</span><span class="distribution__track"><span class="distribution__bar" id="rating-3-bar" style="width:0%"></span></span><span class="distribution__percent" id="rating-3-percent">0%</span></div>
+            <div class="distribution__row"><span class="distribution__label">2★</span><span class="distribution__track"><span class="distribution__bar" id="rating-2-bar" style="width:0%"></span></span><span class="distribution__percent" id="rating-2-percent">0%</span></div>
+            <div class="distribution__row"><span class="distribution__label">1★</span><span class="distribution__track"><span class="distribution__bar" id="rating-1-bar" style="width:0%"></span></span><span class="distribution__percent" id="rating-1-percent">0%</span></div>
+          </div>
+        </div>
+
+        <div class="reviews__mobile-head">Reviews <span><span class="material-symbols-outlined icon-18" style="color:var(--color-star);font-variation-settings:'FILL' 1">star</span><span id="reviews-average-mobile">0.0</span> (<span id="reviews-total-mobile">0</span>)</span></div>
+
+        <div class="review-list" id="review-list">
+        </div>
+        <button type="button" class="button-secondary" id="show-more-reviews">Show more reviews</button>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Floating cart bar (set hidden when the cart is empty) -->
+  <a href="/cart" class="cart-bar" id="cart-bar">
+    <span class="cart-bar__label"><span class="material-symbols-outlined icon-18">shopping_bag</span>View cart, <span id="cart-bar-count">2</span> items</span>
+    <span id="cart-bar-total">EGP 190</span>
+  </a>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner page-container">
+      <a href="/help" class="site-footer__link">Help</a>
+      <a href="/about" class="site-footer__link">About Loqma</a>
+      <a href="/terms" class="site-footer__link">Terms</a>
+      <a href="/privacy" class="site-footer__link">Privacy</a>
+      <span>© <span id="footer-year">2026</span> Loqma</span>
+    </div>
+  </footer>
+
+  <!-- Mobile bottom navigation -->
+  <nav class="bottom-nav" aria-label="Primary">
+    <a href="/" class="bottom-nav__item"><span class="material-symbols-outlined icon-24">home</span>Home</a>
+    <a href="/orders" class="bottom-nav__item"><span class="material-symbols-outlined icon-24">shopping_bag</span>Orders</a>
+    <a href="/promotions" class="bottom-nav__item"><span class="material-symbols-outlined icon-24">confirmation_number</span>Promotions</a>
+    <a href="/account" class="bottom-nav__item"><span class="material-symbols-outlined icon-24">person</span>Account</a>
+  </nav>
+
+  <script src="../../assets/js/config.js"></script>
+  <script src="../../assets/js/api.js"></script>
+  <script src="js/restaurant.js"></script>
+</body>
+</html>
