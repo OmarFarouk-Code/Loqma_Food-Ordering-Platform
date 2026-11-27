@@ -1,12 +1,10 @@
 package com.loqma.admin.service;
 
+import com.loqma.order.entity.Coupon;
 import com.loqma.coupon.AdminCouponRepository;
 import com.loqma.coupon.CouponRequest;
 import com.loqma.coupon.CouponResponse;
-import com.loqma.coupon.exception.CouponLockedException;
-import com.loqma.coupon.exception.CouponNotFoundException;
-import com.loqma.coupon.exception.DuplicateCouponCodeException;
-import com.loqma.order.entity.Coupon;
+import com.loqma.coupon.exception.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

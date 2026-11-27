@@ -146,7 +146,6 @@ public class CartService {
         calculateTotals(cart);
     }
 
-    // TODO: Use after a confirmed checkout
     @Transactional
     public void clearCart(String cartId) {
         Cart cart = cartRepository.findById(cartId)
@@ -156,7 +155,6 @@ public class CartService {
         calculateTotals(cart);
     }
 
-    // TODO: Use during checkout
     public Double applyCoupon(String code) {
         Coupon coupon = couponRepository.findByCode(code);
 

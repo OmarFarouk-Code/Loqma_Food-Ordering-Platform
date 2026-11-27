@@ -1,7 +1,6 @@
 package com.loqma.coupon;
 
 import com.loqma.order.entity.Coupon;
-
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
