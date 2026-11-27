@@ -43,13 +43,13 @@ public class AdminController {
 
     @PatchMapping("/{id}/reject")
     public ResponseEntity<Map<String, String>> reject(@PathVariable String id,
-                                                      @RequestBody RejectRequest req) {
+                                                      @RequestBody(required = false) RejectRequest req) {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
             return ResponseEntity.status(404).body(Map.of("message", "User not found"));
         }
         user.setStatus(AccountStatus.REJECTED);
-        user.setRejectionReason(req.reason());
+        user.setRejectionReason(req != null ? req.reason() : null);
         userRepository.save(user);
         return ResponseEntity.ok(Map.of("message", "Rejected"));
     }

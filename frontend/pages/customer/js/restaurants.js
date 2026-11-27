@@ -190,6 +190,19 @@ function renderRestaurants(container, restaurants, { append = false } = {}) {
     container.innerHTML = html;
   }
   attachFavoriteListeners(container);
+  attachCardClickListeners(container);
+}
+
+function attachCardClickListeners(scope) {
+  scope.querySelectorAll(".restaurant-card").forEach((card) => {
+    if (card.dataset.clickWired === "true") return;
+    card.dataset.clickWired = "true";
+    card.addEventListener("click", (e) => {
+      if (e.target.closest("button, a")) return;
+      const id = card.dataset.id;
+      if (id) window.location.href = `restaurant.html?id=${encodeURIComponent(id)}`;
+    });
+  });
 }
 
 /**

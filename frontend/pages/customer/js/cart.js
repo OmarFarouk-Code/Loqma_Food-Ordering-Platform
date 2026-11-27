@@ -52,7 +52,7 @@ function getCartId() {
 }
 
 async function loadCart(cartId) {
-  const cart = await api.get(`/api/carts/${cartId}/reciept`);
+  const cart = await api.get(`/api/carts/${cartId}/receipt`);
   renderCart(cart);
 }
 

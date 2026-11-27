@@ -33,6 +33,7 @@ public class CustomerRestaurantService {
     private final CurrentCustomerProvider currentCustomer;
     private final DeliveryTimeCalculator deliveryTimeCalculator;
 
+    @Transactional(readOnly = true)
     public PagedResponse<RestaurantSummaryDto> listRestaurants(String cuisine, Double minRating,
                                                                String search, boolean dealsOnly,
                                                                Double lat, Double lng,

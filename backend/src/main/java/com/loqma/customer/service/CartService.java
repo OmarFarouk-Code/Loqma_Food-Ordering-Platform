@@ -4,6 +4,7 @@ import com.loqma.customer.repository.CouponRepository;
 import com.loqma.order.entity.Coupon;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -38,11 +39,6 @@ public class CartService {
         this.menuItemRepository = menuItemRepository;
     }
 
-    private String generateCartItemId() {
-        // Implement your logic to generate a unique ID for the cart item
-        return java.util.UUID.randomUUID().toString();
-    }
-
     @Transactional(readOnly = true)
     public CartResponse getCartItems(String cartId) {
         if (cartId == null || cartId.isBlank()) {
@@ -74,21 +70,21 @@ public class CartService {
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Menu item not found"));
 
         ItemSize persistedSize = null;
-        if (sizeId != null) {
+        if (sizeId != null && !sizeId.isBlank()) {
             persistedSize = persistedMenuItem.getSizes().stream()
                 .filter(itemSize -> itemSize.getId().equals(sizeId))
                 .findFirst()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Selected size does not belong to menu item"));
         }
 
-        List<ItemExtra> persistedExtras = List.of();
+        List<ItemExtra> persistedExtras = new ArrayList<>();
         if (extraIds != null && !extraIds.isEmpty()) {
-            persistedExtras = extraIds.stream()
+            persistedExtras = new ArrayList<>(extraIds.stream()
                 .map(extraId -> persistedMenuItem.getExtras().stream()
                     .filter(itemExtra -> itemExtra.getId().equals(extraId))
                     .findFirst()
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Selected extra does not belong to menu item")))
-                .toList();
+                .toList());
         }
 
         Double linePrice = persistedMenuItem.getBasePrice();
@@ -100,7 +96,15 @@ public class CartService {
         }
         linePrice *= quantity;
 
-        CartItem cartItem = new CartItem(generateCartItemId(), cart, persistedMenuItem, persistedSize, persistedExtras, quantity, note, linePrice);
+        CartItem cartItem = CartItem.builder()
+            .cart(cart)
+            .menuItem(persistedMenuItem)
+            .selectedSize(persistedSize)
+            .selectedExtras(persistedExtras)
+            .quantity(quantity)
+            .customerNote(note)
+            .linePrice(linePrice)
+            .build();
         CartItem savedCartItem = cartItemRepository.saveAndFlush(cartItem);
         calculateTotals(cart);
         return toResponse(savedCartItem);
@@ -158,6 +162,8 @@ public class CartService {
 
         if (coupon == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Coupon not found");
+        } else if (!Boolean.TRUE.equals(coupon.getIsActive())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Coupon is not active");
         } else if (coupon.getExpiryDate().isBefore(LocalDate.now())) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Coupon Expired");
         } else {
@@ -168,17 +174,20 @@ public class CartService {
     // Also saves and flushes to database
     private void calculateTotals(Cart cart) {
         List<CartItem> items = cartItemRepository.findByCartId(cart.getId());
-        Double subtotal = 0.0, tax;
+        double subtotal = 0.0;
 
         for (CartItem item : items) {
             subtotal += item.getLinePrice();
         }
 
-        tax = 0.14 * subtotal;
+        double tax = 0.14 * subtotal;
+        double deliveryFee = cart.getDeliveryFee() == null ? 0.0 : cart.getDeliveryFee();
+        double serviceFee = cart.getServiceFee() == null ? 0.0 : cart.getServiceFee();
+        double discount = cart.getDiscount() == null ? 0.0 : cart.getDiscount();
 
         cart.setSubtotal(subtotal);
         cart.setTax(tax);
-        cart.setTotalPrice(subtotal + tax);
+        cart.setTotalPrice(Math.max(0.0, subtotal + deliveryFee + serviceFee + tax - discount));
 
         cartRepository.saveAndFlush(cart);
     }
