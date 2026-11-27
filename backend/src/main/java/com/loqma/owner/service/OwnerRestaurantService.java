@@ -32,6 +32,8 @@ public class OwnerRestaurantService {
         r.setPhone(req.phone());
         r.setDeliveryFee(req.deliveryFee());
         r.setMinimumOrderAmount(req.minimumOrderAmount());
+        r.setPrepTime(req.prepTime());
+        r.setMaxDeliveryDistance(req.maxDeliveryDistance());
         r.setGpsLocation(req.gpsLocation());
 
         if (r.getOwner() != null) {
@@ -64,6 +66,8 @@ public class OwnerRestaurantService {
                 r.getPhone(),
                 r.getDeliveryFee(),
                 r.getMinimumOrderAmount(),
+                r.getPrepTime(),
+                r.getMaxDeliveryDistance(),
                 r.getAverageRating(),
                 Boolean.TRUE.equals(r.getIsOpen()),
                 r.getGpsLocation()
