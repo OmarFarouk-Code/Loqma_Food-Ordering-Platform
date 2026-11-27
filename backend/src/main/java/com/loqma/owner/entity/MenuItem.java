@@ -45,6 +45,9 @@ public class MenuItem {
     @Builder.Default
     private Boolean isAvailable = true;
 
+    @Column(name = "discount_percent")
+    private Double discountPercent;
+
     @OneToMany(mappedBy = "menuItem", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<ItemSize> sizes = new ArrayList<>();
