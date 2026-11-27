@@ -14,14 +14,21 @@ public class ImageStorageService {
     private final Cloudinary cloudinary;
 
     public ImageStorageService(
-            @Value("${cloudinary.cloud-name}") String name,
-            @Value("${cloudinary.api-key}") String key,
-            @Value("${cloudinary.api-secret}") String secret) {
-        this.cloudinary = new Cloudinary(ObjectUtils.asMap(
-            "cloud_name", name, "api_key", key, "api_secret", secret));
+            @Value("${cloudinary.cloud-name:}") String name,
+            @Value("${cloudinary.api-key:}") String key,
+            @Value("${cloudinary.api-secret:}") String secret) {
+        this.cloudinary = name.isBlank() || key.isBlank() || secret.isBlank()
+                ? null
+                : new Cloudinary(ObjectUtils.asMap(
+                        "cloud_name", name, "api_key", key, "api_secret", secret));
     }
 
     public String upload(MultipartFile file, String folder) throws IOException {
+        if (cloudinary == null) {
+            throw new IllegalStateException(
+                    "Image uploads require cloudinary.cloud-name, cloudinary.api-key, and cloudinary.api-secret");
+        }
+
         String type = file.getContentType();
         if (type == null || !List.of("image/jpeg","image/png","image/webp").contains(type)) {
             throw new IllegalArgumentException("Only JPG, PNG or WebP allowed");

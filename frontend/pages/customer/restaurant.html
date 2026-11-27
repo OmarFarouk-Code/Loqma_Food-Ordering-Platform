@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Restaurant – Loqma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Loqma styles -->
+  <link href="css/restaurant.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Desktop header (same markup as home page) -->
+  <header class="site-header">
+    <div class="site-header__inner page-container">
+      <div class="site-header__left">
+        <a href="/" class="brand-logo">Loqma</a>
+        <nav class="main-nav">
+          <a href="/" class="main-nav__link">Home</a>
+          <a href="/orders" class="main-nav__link">Orders</a>
+          <a href="/promotions" class="main-nav__link">Promotions</a>
+        </nav>
+      </div>
+      <form class="header-search" role="search" onsubmit="return false">
+        <label class="header-search__box">
+          <span class="material-symbols-outlined header-search__icon">search</span>
+          <input type="search" id="search-input" class="header-search__input" placeholder="Search restaurants or dishes">
+        </label>
+      </form>
+      <div class="header-actions">
+        <a href="/notifications" class="icon-button" aria-label="Notifications">
+          <span class="material-symbols-outlined icon-24">notifications</span>
+          <span class="icon-button__badge" id="notification-badge">3</span>
+        </a>
+        <a href="/cart" class="icon-button" aria-label="Cart">
+          <span class="material-symbols-outlined icon-24">shopping_bag</span>
+          <span class="icon-button__badge" id="cart-badge">2</span>
+        </a>
+        <div class="user-menu">
+          <span class="user-menu__avatar" id="user-avatar"><span class="material-symbols-outlined icon-20">person</span></span>
+          <span class="user-menu__name" id="user-name">Omar Aly</span>
+          <span class="material-symbols-outlined user-menu__arrow">keyboard_arrow_down</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile header + sub bar -->
+  <header class="mobile-header">
+    <a href="/" class="brand-logo">Loqma</a>
+    <div class="header-actions">
+      <a href="/cart" class="icon-button" aria-label="Cart"><span class="material-symbols-outlined icon-24">shopping_bag</span><span class="icon-button__badge" id="mobile-cart-badge">2</span></a>
+      <a href="/notifications" class="icon-button" aria-label="Notifications"><span class="material-symbols-outlined icon-24">notifications</span><span class="icon-button__badge" id="mobile-notification-badge">3</span></a>
+      <span class="user-menu__avatar" id="mobile-user-avatar"><span class="material-symbols-outlined icon-20">person</span></span>
+    </div>
+  </header>
+  <div class="mobile-subbar">
+    <a href="javascript:history.back()" class="round-button" id="mobile-back-link" aria-label="Back"><span class="material-symbols-outlined icon-20">arrow_back</span></a>
+    <span class="mobile-subbar__title" id="mobile-restaurant-name">Zahra Grill</span>
+    <div class="mobile-subbar__actions">
+      <button type="button" class="round-button" id="favorite-btn" aria-label="Favorite"><span class="material-symbols-outlined icon-20">favorite</span></button>
+      <a href="/cart" class="round-button" aria-label="Cart"><span class="material-symbols-outlined icon-20">shopping_bag</span><span class="icon-button__badge" id="subbar-cart-badge">2</span></a>
+    </div>
+  </div>
+
+  <main class="page-content restaurant-page">
+    <div class="page-container">
+
+      <!-- Cover + info -->
+      <div class="cover"><img class="cover__image" id="restaurant-cover" alt=""></div>
+
+      <section class="restaurant-info">
+        <span class="restaurant-info__logo" id="restaurant-logo"><span class="material-symbols-outlined icon-24">outdoor_grill</span></span>
+
+        <div class="restaurant-info__top">
+          <div>
+            <div class="restaurant-info__name-row">
+              <h1 class="restaurant-info__name" id="restaurant-name">Zahra Grill</h1>
+              <span class="status-badge" id="restaurant-status">Open now · Closes 11:00 PM</span>
+            </div>
+            <div class="restaurant-info__line">
+              <span class="restaurant-info__rating"><span class="material-symbols-outlined icon-18">star</span><span id="restaurant-rating">4.6</span></span>
+              <span class="restaurant-info__reviews">(<span id="restaurant-reviews-count">320</span> reviews)</span>
+              <span class="dot">•</span><span id="restaurant-address">Street 90, New Cairo</span><span class="dot">•</span>
+            </div>
+            <div class="restaurant-info__line"><span id="restaurant-phone">0100 123 4567</span></div>
+            <div class="restaurant-info__stats">
+              <span class="restaurant-info__stat"><span class="material-symbols-outlined icon-14">schedule</span><span id="restaurant-delivery-time">25-35 min</span></span>
+              <span class="restaurant-info__stat"><span class="material-symbols-outlined icon-14">pedal_bike</span><span id="restaurant-delivery-fee">EGP 25 delivery</span></span>
+              <span class="restaurant-info__stat"><span class="material-symbols-outlined icon-14">shopping_bag</span><span id="restaurant-min-order">Min EGP 100</span></span>
+            </div>
+          </div>
+          <div class="promo" id="promo-box"><span class="material-symbols-outlined icon-18">sell</span><span id="promo-text">EGP 30 off orders over EGP 250</span></div>
+        </div>
+
+        <div class="menu-toolbar">
+          <nav class="category-tabs" id="category-tabs" aria-label="Menu categories">
+          <a href="#category-grills" class="category-tab category-tab--active" id="category-tab-grills">Grills</a>
+          <a href="#category-sandwiches" class="category-tab" id="category-tab-sandwiches">Sandwiches</a>
+          <a href="#category-sides" class="category-tab" id="category-tab-sides">Sides</a>
+          <a href="#category-drinks" class="category-tab" id="category-tab-drinks">Drinks</a>
+          </nav>
+          <label class="menu-search">
+            <span class="material-symbols-outlined icon-18">search</span>
+            <input type="search" id="menu-search" placeholder="Search this menu">
+          </label>
+        </div>
+      </section>
+
+      <!-- Menu: repeat sections / cards, ids indexed -->
+      <div id="menu-sections">
+      <section class="menu-section" id="category-grills">
+        <h2 class="menu-section__title" id="category-grills-title">Grills</h2>
+        <p class="menu-section__desc" id="category-grills-description">Signature charcoal-grilled specialties prepared fresh to order.</p>
+        <div class="menu-grid">
+          <article class="menu-card" id="menu-item-1" data-item-id="">
+            <div class="menu-card__body">
+              <div>
+                <div class="menu-card__name-row">
+                  <h3 class="menu-card__name" id="menu-item-1-name">Mixed grill platter</h3>
+                  <span class="unavailable-badge" id="menu-item-1-badge">Unavailable</span>
+                </div>
+                <p class="menu-card__desc" id="menu-item-1-description">Kebab, kofta and shish tawook served with grilled vegetables and baladi bread.</p>
+              </div>
+              <p class="menu-card__price" id="menu-item-1-price">EGP 285</p>
+            </div>
+            <div class="menu-card__image-box">
+              <img class="menu-card__image" id="menu-item-1-image" alt="Mixed grill platter">
+              <button type="button" class="menu-card__add" id="menu-item-1-add" aria-label="Add Mixed grill platter"><span class="material-symbols-outlined icon-20">add</span></button>
+            </div>
+          </article>
+
+          <article class="menu-card" id="menu-item-2" data-item-id="">
+            <div class="menu-card__body">
+              <div>
+                <div class="menu-card__name-row">
+                  <h3 class="menu-card__name" id="menu-item-2-name">Chicken shish tawook</h3>
+                  <span class="unavailable-badge" id="menu-item-2-badge">Unavailable</span>
+                </div>
+                <p class="menu-card__desc" id="menu-item-2-description">Marinated chicken skewers char-grilled to perfection with peppers and onions.</p>
+              </div>
+              <p class="menu-card__price" id="menu-item-2-price">EGP 165</p>
+            </div>
+            <div class="menu-card__image-box">
+              <img class="menu-card__image" id="menu-item-2-image" alt="Chicken shish tawook">
+              <button type="button" class="menu-card__add" id="menu-item-2-add" aria-label="Add Chicken shish tawook"><span class="material-symbols-outlined icon-20">add</span></button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="menu-section" id="category-sandwiches">
+        <h2 class="menu-section__title" id="category-sandwiches-title">Sandwiches</h2>
+        <p class="menu-section__desc" id="category-sandwiches-description">Handheld favorites packed in freshly baked Egyptian baladi bread.</p>
+        <div class="menu-grid">
+          <article class="menu-card" id="menu-item-3" data-item-id="">
+            <div class="menu-card__body">
+              <div>
+                <div class="menu-card__name-row">
+                  <h3 class="menu-card__name" id="menu-item-3-name">Kofta sandwich</h3>
+                  <span class="unavailable-badge" id="menu-item-3-badge">Unavailable</span>
+                </div>
+                <p class="menu-card__desc" id="menu-item-3-description">Seasoned char-grilled minced meat in freshly baked baladi bread.</p>
+              </div>
+              <p class="menu-card__price" id="menu-item-3-price">EGP 95</p>
+            </div>
+            <div class="menu-card__image-box">
+              <img class="menu-card__image" id="menu-item-3-image" alt="Kofta sandwich">
+              <button type="button" class="menu-card__add" id="menu-item-3-add" aria-label="Add Kofta sandwich"><span class="material-symbols-outlined icon-20">add</span></button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="menu-section" id="category-sides">
+        <h2 class="menu-section__title" id="category-sides-title">Sides</h2>
+        <p class="menu-section__desc" id="category-sides-description">Complement your feast with our homemade mezze and dips.</p>
+        <div class="menu-grid">
+          <article class="menu-card" id="menu-item-4" data-item-id="">
+            <div class="menu-card__body">
+              <div>
+                <div class="menu-card__name-row">
+                  <h3 class="menu-card__name" id="menu-item-4-name">Baba ghanoush</h3>
+                  <span class="unavailable-badge" id="menu-item-4-badge">Unavailable</span>
+                </div>
+                <p class="menu-card__desc" id="menu-item-4-description">Smoked eggplant dip with tahini, garlic, and extra virgin olive oil.</p>
+              </div>
+              <p class="menu-card__price" id="menu-item-4-price">EGP 55</p>
+            </div>
+            <div class="menu-card__image-box">
+              <img class="menu-card__image" id="menu-item-4-image" alt="Baba ghanoush">
+              <button type="button" class="menu-card__add" id="menu-item-4-add" aria-label="Add Baba ghanoush"><span class="material-symbols-outlined icon-20">add</span></button>
+            </div>
+          </article>
+
+          <article class="menu-card" id="menu-item-5" data-item-id="">
+            <div class="menu-card__body">
+              <div>
+                <div class="menu-card__name-row">
+                  <h3 class="menu-card__name" id="menu-item-5-name">Fries</h3>
+                  <span class="unavailable-badge" id="menu-item-5-badge">Unavailable</span>
+                </div>
+                <p class="menu-card__desc" id="menu-item-5-description">Crispy golden French fries tossed in house seasoning.</p>
+              </div>
+              <p class="menu-card__price" id="menu-item-5-price">EGP 45</p>
+            </div>
+            <div class="menu-card__image-box">
+              <img class="menu-card__image" id="menu-item-5-image" alt="Fries">
+              <button type="button" class="menu-card__add" id="menu-item-5-add" aria-label="Add Fries"><span class="material-symbols-outlined icon-20">add</span></button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="menu-section" id="category-drinks">
+        <h2 class="menu-section__title" id="category-drinks-title">Drinks</h2>
+        <p class="menu-section__desc" id="category-drinks-description">Refreshing beverages to pair with grilled dishes.</p>
+        <div class="menu-grid">
+          <article class="menu-card is-unavailable" id="menu-item-6" data-item-id="">
+            <div class="menu-card__body">
+              <div>
+                <div class="menu-card__name-row">
+                  <h3 class="menu-card__name" id="menu-item-6-name">Fresh lemon mint</h3>
+                  <span class="unavailable-badge" id="menu-item-6-badge">Unavailable</span>
+                </div>
+                <p class="menu-card__desc" id="menu-item-6-description">Freshly blended lemon juice with crushed garden mint and ice.</p>
+              </div>
+              <p class="menu-card__price" id="menu-item-6-price">EGP 40</p>
+            </div>
+            <div class="menu-card__image-box">
+              <img class="menu-card__image" id="menu-item-6-image" alt="Fresh lemon mint">
+              <button type="button" class="menu-card__add" id="menu-item-6-add" aria-label="Add Fresh lemon mint"><span class="material-symbols-outlined icon-20">add</span></button>
+            </div>
+          </article>
+
+          <article class="menu-card" id="menu-item-7" data-item-id="">
+            <div class="menu-card__body">
+              <div>
+                <div class="menu-card__name-row">
+                  <h3 class="menu-card__name" id="menu-item-7-name">Cola</h3>
+                  <span class="unavailable-badge" id="menu-item-7-badge">Unavailable</span>
+                </div>
+                <p class="menu-card__desc" id="menu-item-7-description">330ml can chilled.</p>
+              </div>
+              <p class="menu-card__price" id="menu-item-7-price">EGP 25</p>
+            </div>
+            <div class="menu-card__image-box">
+              <img class="menu-card__image" id="menu-item-7-image" alt="Cola">
+              <button type="button" class="menu-card__add" id="menu-item-7-add" aria-label="Add Cola"><span class="material-symbols-outlined icon-20">add</span></button>
+            </div>
+          </article>
+        </div>
+      </section>
+      </div>
+
+      <!-- Reviews -->
+      <section class="reviews" id="reviews">
+        <div class="reviews__summary">
+          <div>
+            <h2 class="reviews__title">Customer reviews</h2>
+            <div class="reviews__score">
+              <span class="reviews__average" id="reviews-average">4.6</span>
+              <div>
+                <span class="stars stars--lg" id="reviews-stars" style="--rating:4.6" aria-label="4.6 out of 5"></span>
+                <p class="reviews__meta">Based on <span id="reviews-total">320</span> verified reviews</p>
+              </div>
+            </div>
+          </div>
+          <div class="distribution" id="rating-distribution">
+            <div class="distribution__row"><span class="distribution__label">5★</span><span class="distribution__track"><span class="distribution__bar" id="rating-5-bar" style="width:78%"></span></span><span class="distribution__percent" id="rating-5-percent">78%</span></div>
+            <div class="distribution__row"><span class="distribution__label">4★</span><span class="distribution__track"><span class="distribution__bar" id="rating-4-bar" style="width:16%"></span></span><span class="distribution__percent" id="rating-4-percent">16%</span></div>
+            <div class="distribution__row"><span class="distribution__label">3★</span><span class="distribution__track"><span class="distribution__bar" id="rating-3-bar" style="width:4%"></span></span><span class="distribution__percent" id="rating-3-percent">4%</span></div>
+            <div class="distribution__row"><span class="distribution__label">2★</span><span class="distribution__track"><span class="distribution__bar" id="rating-2-bar" style="width:1%"></span></span><span class="distribution__percent" id="rating-2-percent">1%</span></div>
+            <div class="distribution__row"><span class="distribution__label">1★</span><span class="distribution__track"><span class="distribution__bar" id="rating-1-bar" style="width:1%"></span></span><span class="distribution__percent" id="rating-1-percent">1%</span></div>
+          </div>
+        </div>
+
+        <div class="reviews__mobile-head">Reviews <span><span class="material-symbols-outlined icon-18" style="color:var(--color-star);font-variation-settings:'FILL' 1">star</span><span id="reviews-average-mobile">4.6</span> (<span id="reviews-total-mobile">320</span>)</span></div>
+
+        <div class="review-list" id="review-list">
+        <article class="review" id="review-1">
+          <div class="review__head"><span id="review-1-author">Ahmed M.</span><span class="review__date" id="review-1-date">3 days ago</span></div>
+          <span class="stars" id="review-1-stars" style="--rating:5" aria-label="5 out of 5"></span>
+          <p class="review__text" id="review-1-text">Best kofta in Tagamoa. Delivery arrived in 25 minutes hot and fresh, baladi bread was still warm.</p>
+        </article>
+
+        <article class="review" id="review-2">
+          <div class="review__head"><span id="review-2-author">Nour K.</span><span class="review__date" id="review-2-date">1 week ago</span></div>
+          <span class="stars" id="review-2-stars" style="--rating:4" aria-label="4 out of 5"></span>
+          <p class="review__text" id="review-2-text">Chicken shish tawook is consistently great. The baba ghanoush has an authentic wood-smoked taste.</p>
+        </article>
+        </div>
+        <button type="button" class="button-secondary" id="show-more-reviews">Show more reviews</button>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Floating cart bar (set hidden when the cart is empty) -->
+  <a href="/cart" class="cart-bar" id="cart-bar">
+    <span class="cart-bar__label"><span class="material-symbols-outlined icon-18">shopping_bag</span>View cart, <span id="cart-bar-count">2</span> items</span>
+    <span id="cart-bar-total">EGP 190</span>
+  </a>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner page-container">
+      <a href="/help" class="site-footer__link">Help</a>
+      <a href="/about" class="site-footer__link">About Loqma</a>
+      <a href="/terms" class="site-footer__link">Terms</a>
+      <a href="/privacy" class="site-footer__link">Privacy</a>
+      <span>© <span id="footer-year">2026</span> Loqma</span>
+    </div>
+  </footer>
+
+  <!-- Mobile bottom navigation -->
+  <nav class="bottom-nav" aria-label="Primary">
+    <a href="/" class="bottom-nav__item"><span class="material-symbols-outlined icon-24">home</span>Home</a>
+    <a href="/orders" class="bottom-nav__item"><span class="material-symbols-outlined icon-24">shopping_bag</span>Orders</a>
+    <a href="/promotions" class="bottom-nav__item"><span class="material-symbols-outlined icon-24">confirmation_number</span>Promotions</a>
+    <a href="/account" class="bottom-nav__item"><span class="material-symbols-outlined icon-24">person</span>Account</a>
+  </nav>
+
+  <script src="../../assets/js/config.js"></script>
+  <script src="../../assets/js/api.js"></script>
+  <script src="js/restaurant.js"></script>
+</body>
+</html>
